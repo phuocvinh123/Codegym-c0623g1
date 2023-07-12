@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <script> 
+    //bài 1:Sử dụng vòng lặp để đếm từ 1 đến 100. Khi số là 99, hiển thị hộp thoại thông báo là đã hoàn thành.
+    //for (i=0;i<100;i++){
+    // document.write(i+"<br>")
+    // }alert("đã hoàn thành")
+    //bài 2:Sử dụng hàm prompt() để lấy thông tin nhiệt độ hiện tại được nhập bởi người truy cập. Nếu nhiệt độ nhập vào trên 100, yêu cầu người dùng giảm nhiệt độ.
+    // let a=null
+    // do{
+    //     a=Number(prompt("nhập nhiệt độ"));
+    //     alert("yêu cầu giảm nhiệt độ");
+    // }while(a>100||a>0);
+    // alert(" nhiệt độ phù hợp");
+    //bài 3: Hiển thị ra 20 số trong dãy fibonacci đầu tiên.
+    // let a =0;
+    // let b =1;
+    // for (i=1;i<=20;i++){
+    //     console.log(a);
+    //  c = a + b;        
+    //  a = b;
+    //  b = c; } 
+    //bài 4: Tìm số đầu tiên trong dãy fibonacci chia hết cho 5.
+    // let a=Number(prompt("nhập số a bất kỳ"));
+    // let b =Number(prompt("nhập số b bất kỳ"));
+    // let c;
+    // while (true) {
+    //  c = a + b;
+    // if (c % 5 === 0) {
+    // alert(c);
+    // break;
+    //  }
+    //  a = b;
+    //  b = c;}
+    //bài 5:Tính tổng của 20 số đầu tiên trong dãy fibonacci.
+    //  let a =0;
+   // let b =1;
+    //tong=0
+    //for (i=0;i<=20;i++){
+    //    tong+=a
+    // c = a + b;        
+    // a = b
+    // b = c}
+    // alert(tong)
+    //bài 6:Tính tổng của 30 số chia hết cho 7 đầu tiên trong các số tự nhiên
+    // let count = 0;
+    // let sum = 0;
+    // let i = 1;
+    // while (count < 30) {
+    // if (i % 7 === 0) {
+    // count++;
+    // sum += i;
+    //  }
+    //      i++;
+    // }
+    // console.log(sum);
+    //bài 7:
+    // for(let i=1;i<=100;i++){
+    // if(i % 3 === 0 && i % 5 === 0){
+    //  document.write(i+"FizzBuzz"+"<br>");
+    //   }else if(i % 3 === 0){
+    //   document.write(i+"Fizz"+"<br>"); 
+    //   }else if(i % 5 === 0){
+    //   document.write(i+"Buzz"+"<br>");
+    //  }else{
+    // document.write(i+"không chia hết cho 3 và 5"+"<br>");
+    //         }
+     //     }
+     </script> 
+     //bài 8: Game đoán số-->
+    <button onclick="doanSo()">bắt đầu</button>
+    <script>
+      function doanSo() {
+        debugger;
+        let number = +prompt(
+          "Số bạn muốn đoán trong khoảng lớn nhất là bao nhiêu?"
+        );
+        let number_ran = Math.floor(Math.random() * number);
+        console.log(number_ran);
+        let number_check = +prompt("Nhập số bạn đoán");
+        let count = 0;
+        while (number_check !== number_ran) {
+          count++;
+          if (count == 4) {
+            alert("Bạn hết số lần đoán");
+            break;
+          } else if (number_check < number_ran) {
+            alert("Số bạn đoán bé hơn");
+          } else {
+            alert("Số bạn đoán lớn hơn");
+          }
+          number_check = prompt("Nhập số bạn đoán");
+        }
+        if (count == 4) {
+          document.write("Bạn hết số lần đoán");
+        } else {
+          document.write("Bạn đã đoán đúng số. Chúc mừng bạn!");
+        }
+      }
+    </script>
+  </body>
+</html>

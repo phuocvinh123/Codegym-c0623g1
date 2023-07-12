@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+ <body>
+    <!--bài 1Chuyển từ độ C sang độ F.
+    <script>
+        let a=+prompt("chuyển độ C sang độ F")
+        F=eval(a*9/5+32) 
+        alert(F+'độ F')
+    </script> 
+bài 2 Chuyển từ mét sang feet:
+<script>
+    let m=+prompt("chuyển từ m sang feet")
+    ft=eval(m*3.288)
+    alert(ft+'feet')</script>
+bài 3 Tính diện tích hình vuông khi biết cạnh a.
+<script>
+    let a=+prompt("cạnh a")
+    s=a*a
+    alert('Diện tích hình vuông là:'+s+'m^2')
+</script>
+bài 4 : Tính diện tích hình  chữ nhật khi biết 02 cạnh a, b.
+<script>
+    let a=+prompt("nhập chiều dài")
+    let b=+prompt("nhập chiều rộng")
+    S=a*b
+    alert('diện tích hình chữ nhật là:'+S)
+</script>
+bài 5:Tính diện tích tam giác vuông khi biết 02 cạnh kề a, b.
+<script>
+    let a=+prompt("nhập cạnh đáy của tam giác")
+    let b=+prompt("nhập chiều cao của tam giác")
+    S=eval(1/2*a*b)
+    alert('diện tích của tam giác là:'+S)
+</script>
+bài 6: giải phương trình bậc 1
+<script>
+    let a=+prompt("nhập số a")
+    let b=+prompt("nhập số b")
+    X=eval(b/a)
+    alert('kết quả của phương trình bậc 1 là:-'+ X)
+</script>
+bài 7: giải phương trình bậc 2
+<form>
+    <label for="a">Nhập a:</label>
+    <input type="number" id="a" name="a"><br>
+    <label for="b">Nhập b:</label>
+    <input type="number" id="b" name="b"><br>
+    <label for="c">Nhập c:</label>
+    <input type="number" id="c" name="c"><br>
+    <input type="button" value="Tính nghiệm" onclick="ptb2()">
+    <p id ="result"></p>
+  </form>
+  <script>
+      function ptb2() {
+        var a = Number(document.getElementById("a").value);
+        var b = Number(document.getElementById("b").value);
+        var c = Number(document.getElementById("c").value);
+        
+        var delta = b*b - 4*a*c;
+        
+        if (delta > 0) {
+          var x1 = (-b + Math.sqrt(delta)) / (2*a);
+          var x2 = (-b - Math.sqrt(delta)) / (2*a);
+          document.getElementById("result").innerHTML = "Phương trình có 2 nghiệm phân biệt: x1 = " + x1 + ", x2 = " + x2;
+        } else if (delta == 0) {
+          var x = -b / (2*a);
+          document.getElementById("result").innerHTML = "Phương trình có nghiệm kép: x = " + x;
+        } else {
+          document.getElementById("result").innerHTML = "Phương trình vô nghiệm";
+        }
+      }
+  </script>
+  bài 8: Kiểm tra xem một số nhập vào có phải là tuổi của một người không. Một số nguyên là tuổi của một người khi nhỏ 120 và lơn hơn 0.
+  <script>
+    let a=+prompt("nhập số tuổi")
+    if(a>=1&&a<6){
+        alert(a+'là trẻ con')
+    } else if(a>=6&&a<12){
+        alert(a+'là trẻ em')
+    }else if(a>=12&&a<18){
+        alert(a+'là người trẻ')
+    }else if(a>=18&&a<35){
+      alert(a+'là thanh niên')
+    }else if(a>=35&&a<50){
+      alert(a+'là người trung niên')
+    }else if(a>=50&&a<65){
+      alert(a+'là người cao tuổi')
+    }else if (a>=65&&a<120){
+      alert(a+'là người già')
+    }else{'vui lòng nhập lại'}
+  </script>
+  bài 9:Kiểm tra xem 3 số thực (a,b,c) nhập vào có phải là cạnh của một tam giác. Điều kiện để a,b,c là cạnh của một tam giác là:
+  <script>
+    let a=+prompt("nhập cạnh a")
+    let b=+prompt("nhập cạnh b")
+    let c=+prompt("nhập cạnh c")
+    a,b,c>0
+    if(a+b>c&&a+c>b&&b+c>a){
+      alert('a,b,c là cạnh của tam giác')
+    }else{'a,b,c không phải là cạnh của tam giác'}
+  </script>
+  bài 10: Viết chương trình tính giá điện.
+  <script>
+    let soDien=+prompt('số kWh điện sử dụng trong 1 tháng')
+  if (soDien <= 50) {
+    giaDien = soDien * 1678;
+    alert('số tiền phải trả cho'+soDien+"kwh là"+giaDien+'đồng')
+  } else if (soDien <= 100) {
+    giaDien = 50 * 1678 + (soDien - 50) * 1734;
+    alert('số tiền phải trả cho'+soDien+"kwh là"+giaDien+'đồng')
+  } else if (soDien <= 200) {
+    giaDien = 50 * 1678 + 50 * 1734 + (soDien - 100) * 2014;
+    alert('số tiền phải trả cho'+soDien+"kwh là"+giaDien+'đồng')
+  } else if (soDien <= 300) {
+    giaDien = 50 * 1678 + 50 * 1734 + 100 * 2014 + (soDien - 200) * 2536;
+    alert('số tiền phải trả cho'+soDien+"kwh là"+giaDien+'đồng')
+  } else if (soDien <= 400) {
+    giaDien = 50 * 1678 + 50 * 1734 + 100 * 2014 + 100 * 2536 + (soDien - 300) * 2834;
+    alert('số tiền phải trả cho'+soDien+"kwh là"+giaDien+'đồng')
+  } else {
+    giaDien = 50 * 1678 + 50 * 1734 + 100 * 2014 + 100 * 2536 + 100 * 2834 + (soDien - 400) * 2927;
+    alert('số tiền phải trả cho'+soDien+"kwh là"+giaDien+'đồng')
+  }
+  </script>
+  bài 11:Viết chương trình tính thuế thu nhập cá nhân.
+  <script>
+    let tnCn=+prompt("số tiền thu nhập trong 1 tháng")
+    if(tnCn<=5000000){
+      thue=tnCn*5/100;
+      alert('thuế phải trả là:'+thue)
+    }else if(tnCn<=10000000){
+      thue=tnCn*10/100;
+      alert('thuế phải trả là:'+thue)
+    }else if(tnCn<=18000000){
+      thue=tnCn*15/100;
+      alert('thuế phải trả là:'+thue)
+    }else if(tnCn<=32000000){
+      thue=tnCn*20/100;
+      alert('thuế phải trả là:'+thue)
+    }else if(tnCn<=52000000){
+      thue=tnCn*25/100;
+      alert('thuế phải trả là:'+thue)
+    }else if(tnCn<=80000000){
+      thue=tnCn*30/100;
+      alert('thuế phải trả là:'+thue)}
+      else if(tnCn>80000000){
+      thue=tnCn*35/100;
+      alert('thuế phải trả là:'+thue)
+    }</script>
+    bài 12:Viết chương trình tính lãi ngân hàng (lãi mẹ đẻ lãi con) khi biết số tiền ban đầu, số tháng cho vay và lãi xuất hàng tháng.-->
+  <script>
+    let a=+prompt('số tiền ban đầu gửi ngân hàng')
+    let b=+prompt('số tháng cho vay')
+    let c=+prompt('lãi suất hàng tháng')
+    L=eval(a*(1+c/100)+(1*b)-a)
+    alert('số tiền lãi trong'+b+'là:'+L)
+  </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Máy tính</title>
+    <link rel="stylesheet" href="mau.css">
+</head>
+<body>
+    <div>
+        <h1>Máy tính </h1>
+       <input type="text" id="display" disabled>
+            <tr>
+                <td><button type="button" onclick="get_value(id);" id="btn_1">1</button></td>
+                <td><button type="button" onclick="get_value(id);" id="btn_2">2</button></td>
+                <td><button type="button" onclick="get_value(id);" id="btn_3">3</button></td>
+                <td><button type="button" onclick="get_value(id);" id="btn_pl">+</button></td>
+                <td><button  onclick=" clearDisplay" id="btn_clear">C</button></td>
+            </tr>
+            <tr>
+                <td><button type="button" onclick="get_value(id);" id="btn_4">4</button></td>
+                <td><button type="button" onclick="get_value(id);" id="btn_5">5</button></td>
+                <td><button type="button" onclick="get_value(id);" id="btn_6">6</button></td>
+                <td><button type="button" onclick="get_value(id);" id="btn_sub">-</button></td>
+                <td rowspan="3"><button type="button" class="result" onclick="Result();" id="btn_equ">=</button></td>
+            </tr>
+            <tr>
+                <td><button type="button" onclick="get_value(id);" id="btn_7">7</button></td>
+                <td><button type="button" onclick="get_value(id);" id="btn_8">8</button></td>
+                <td><button type="button" onclick="get_value(id);" id="btn_9">9</button></td>
+                <td><button type="button" onclick="get_value(id);" id="btn_X">X</button></td>
+
+            </tr>
+            <tr>
+                <td><button type="button" onclick="get_value(id);" id="btn_0">0</button></td>
+                <td><button type="button" onclick="get_value(id);" id="btn_00">00</button></td>
+                <td><button type="button" onclick="get_value(id);" id="btn_dot">.</button></td>
+                <td><button type="button" onclick="get_value(id);" id="btn_dv">:</button></td>
+
+            </tr>
+        </table>
+    </div>
+
+    <script src="tinh.js"></script>
+</body>
+</html>

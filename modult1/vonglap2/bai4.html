@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //bài 1
+      // let a=0;
+      // let b=1;
+      // for(i=1;i<30;i++){
+      // c=a+b;
+      // console.log(a)
+      // a=b;
+      // b=c}
+      // bài 2:
+      //       var n=Number(prompt("enter the number"));
+      //       var gt=1;
+      //       for(i=1;i<=n;i++){
+      //         gt*=i;
+      // } document.write(n+"!="+gt);
+      //bài 3:
+      // function sao(n) {
+      //                 let result = '';
+      //                 for (let i = 1; i <= n; i++) {
+      //                     for (let j = 1; j <= i; j++) {
+      //                         result += '*';
+      //                     }
+      //                     result += "\n";
+      //                 }
+      //                 console.log(result);
+      //             }sao(5);
+      //bài 4:
+      // for (i = 1; i <= 6; i++) {
+      //   a = "";
+      //   for (j = 1; j <= 8; j++) {
+      //     if (i == 1 || i == 6) {
+      //       a += "*";
+      //     } else {
+      //       if (j == 1 || j == 8) {
+      //         a += "*";
+      //       } else {
+      //         a += "&nbsp&nbsp";
+      //       }
+      //     }
+      //   }
+      //   document.writeln(a);
+      //   document.writeln("</br>");
+      // }
+      //bài 5:
+      // let a=Number(prompt("số tiền ban đầu gưỉ ngân hàng "))
+      // let b=Number(prompt("lãi suất hàng tháng "))
+      // let c=Number(prompt("số tháng cho vay "))
+      // laiKep=eval(a*(1+b/100)^(c-1))
+      // alert("lãi suất hàng tháng là:"+laiKep)
+      //bài 6:
+      for (i = 1; i <= 8; i++) {
+        a = "";
+        for (j = 1; j <= 3; j++) {
+          if (i == 1 || i == 8) {
+            a += "*";
+          } else {
+            if (j == 1 || j == 3) {
+              a += "*";
+            } else {
+              a += "&nbsp&nbsp";
+            }
+          }
+        }
+        document.writeln(a);
+        document.writeln("</br>");
+      }
+    </script>
+  </body>
+</html>

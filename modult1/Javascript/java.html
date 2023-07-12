@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FORM1</title>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      h1 {
+        color: white;
+        background-color: orangered;
+        text-align: center;
+        font-weight: 200;
+      }
+      table {
+        border: 1;
+        border-collapse: collapse;
+      }
+      .input_hob tr td p {
+        color: orangered;
+        font-weight: 100;
+        font-size: 12px;
+      }
+      .input_hob tr td {
+        width: 200px;
+      }
+      td label {
+        color: orangered;
+        font-size: 12px;
+      }
+      .input_hob tr td {
+        width: 120px;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="background-color: aqua; padding: 20px; width: 510px">
+      <div style="width: 500px; background-color: rgb(255, 255, 255)">
+        <form action="/action.php" method="get">
+          <h1>SỞ THÍCH CỦA BẠN</h1>
+          <table class="input_info">
+            <tr>
+              <td
+                style="
+                  text-align: right;
+                  color: blue;
+                  padding-right: 20px;
+                  padding-bottom: 7px;
+                "
+                width="100px"
+              >
+                Họ và tên
+              </td>
+              <td>
+                <input style="width: 200px" type="text" name="input_name" />
+              </td>
+            </tr>
+            <tr>
+              <td
+                style="
+                  text-align: right;
+                  color: blue;
+                  padding-right: 20px;
+                  padding-bottom: 7px;
+                "
+                width="100px"
+              >
+                Email
+              </td>
+              <td>
+                <input style="width: 150px" type="text" name="inpur_email" />
+              </td>
+            </tr>
+          </table>
+          <table class="input_hob" style="margin-top: 15px">
+            <tr>
+              <td
+                rowspan="3"
+                style="
+                  vertical-align: top;
+                  text-align: right;
+                  padding-right: 20px;
+                  width: 100px;
+                "
+              >
+                Sở thích
+              </td>
+              <td>
+                <input type="checkbox" name="Thethao" />
+                <label for="checkbox">Thể Thao</label>
+              </td>
+              <td>
+                <input type="checkbox" name="Amnhac" />
+                <label for="checkbox">Âm nhạc</label>
+              </td>
+              <td>
+                <input type="checkbox" name="Docsach" />
+                <label for="checkbox">Đọc sách</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input type="checkbox" name="Luotweb" />
+                <label for="checkbox">Lướt web</label>
+              </td>
+              <td>
+                <input type="checkbox" name="choigame" />
+                <label for="checkbox">Chơi game</label>
+              </td>
+              <td>
+                <input type="checkbox" name="dienanh" />
+                <label for="checkbox">Điện ảnh</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input type="checkbox" id="input_hob" name="Dulich" />
+                <label for="checkbox">Du lịch</label>
+              </td>
+              <td></td>
+              <td></td>
+            </tr>
+          </table>
+          <table style="text-align: center; margin-top: 20px">
+            <tr>
+              <td style="width: 200px; text-align: center">
+                <button type="submit" name="submit" style="margin-bottom: 10px">
+                  Gửi thông tin
+                </button>
+              </td>
+              <td style="width: 200px; text-align: center">
+                <button type="reset" name="reset" style="margin-bottom: 10px">
+                  Nhập lại
+                </button>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
