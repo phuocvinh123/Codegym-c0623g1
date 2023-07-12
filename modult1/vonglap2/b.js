@@ -121,14 +121,16 @@ let arr = [
   [1, 1, 1, 1],
   [3, 0, 3, 5],
 ];
-let str = "";
-let count = "";
+let count = 0;
 for (let i = 0; i < arr.length; i++) {
   for (let j = 0; j < arr[i].length; j++) {
-    if (arr[i][j] % 2 == 0 && arr[i][j] > 0) {
-      str += `i: ${i} j: ${j}`;
-      break;
+    if (arr[i][j] % 2 == 0 ) {
+      count++;
+      if(count==2){
+        console.log("số chẵn xuất hiện thứ 2 là"+""+arr[i][j])
+      }
+      
     }
   }
 }
-console.log(str);
+
