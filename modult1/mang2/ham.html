@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //bài 1:tìm giá trị lớn nhất của mảng
+      // let a = [1, 4, 3, 2, 6, 7, 4, 9];
+      // function maxNumber(number) {
+      // let max = number[0];
+      // for (let i = 0; i < number.length; i++) {
+      //if (number[i] > max) {
+      //         max = number[i];
+      //       }
+      //     }
+      //     return max;
+      //   }
+      //   let s= maxNumber(a);
+      //   console.log("giá trị lớn nhất trong mảng là" + s);
+      //bài 2:tìm giá trị lớn thứ 2 trong mảng
+      // let a = [1, 4, 3, 2, 6, 7, 4, 9];
+      // function maxSecond(number){
+      //     let max=number[0];
+      //     let secondMax=[1];
+      //     for(let i=0;i<number.length;i++){
+      //         if(number[i]>max){
+      //             secondMax=max
+      //             max=number[i];
+      //         }else if(number[i]>secondMax){
+      //             secondMax =number[i];
+      //         }
+      //     } return secondMax;
+      // } let second=maxSecond(a);
+      // console.log("giá trị lớn thứ 2 trong mảng là"+second)
+      //bài 3:Tính tổng 3 giá trị lẻ đầu tiên
+      // let a = [1, 4, 3, 2, 6, 7, 4, 9];
+      // function total(number){
+      //     let sum=0;
+      //     let count=0;
+      //     for(let i=0;i<number.length;i++){
+      //         if(number[i]%2 !=0){
+      //           sum+=number[i];
+      //           count++
+      //         }if(count===3){
+      //             break;
+      //         }
+      //     }return sum;
+      // }let num=total(a)
+      // console.log("tông 3 số lẻ đầu tiên của mảng là:"+num)
+      //bài 4:Đảo ngược mảng
+      // let a = [1, 4, 3, 2, 6, 7, 4, 9];
+      // function reverseA(number){
+      //     let reverse2= number.reverse();
+      // return reverse2;
+      // } let s=reverseA(a);
+      // console.log(s.join(""))
+      //bài 5:nối mảng b vào mảng a
+      //   let a = [1, 4, 3, 2, 6, 7, 4, 9];
+      //   let b = [1, 4, 3, 2, 6, 7, 4, 9];
+      //   function concatAB(characters){
+      //     let c=a.concat(b);
+      //     return c;
+      //   }let s=concatAB(a);
+      //   console.log(s)
+      //bài 6:tính tổng các số nguyên tố trong mảng
+      //   let a = [1, 4, 3, 2, 6, 7, 4, 9];
+      //   function checkPrime(number) {
+      //     if (number < 2) {
+      //       return false;
+      //     }
+      //     for (let i = 2; i < number; i++) {
+      //       if (number % i == 0) {
+      //         return false;
+      //       }
+      //     }
+      //     return true;
+      //   }
+      //   function checkPrime2(number) {
+      //     let sum = 0;
+      //     for (let i = 0; i < number.length; i++) {
+      //       if (checkPrime(number[i])) {
+      //         sum += number[i];
+      //       }
+      //     }
+      //     return sum;
+      //   }
+      //   let sum = checkPrime2(a);
+      //   console.log(sum);
+      //bài 7:tính trung bình các số chính phương trong mảng
+      // let a = [1, 4, 3, 2, 6, 7, 4, 9];
+      // function chinhPhuOng(number){
+      //     let sqrt=Math.sqrt(number);
+      //     return sqrt ===Math.floor(sqrt);
+      // }
+      // function tongChinhPhuOng(number){
+      //     let str=[];
+      //     let total=0;
+      //     for(let i=0;i<number.length;i++){
+      //         if(chinhPhuOng(number[i])){
+      //             str.push(number[i]);
+      //             total+=number[i];
+      //         }
+      //     } return total;
+      // } let s=tongChinhPhuOng(a);
+      // console.log(s);
+      //bài 8:hiển thị các cột chẵn
+      // let a = [1, 4, 3, 2, 6, 7, 4, 9];
+      // function cotChan(number) {
+      //     let str=[];
+      //   for(let i=0;i<number.length;i+=2){
+      //     str.push(number[i])
+      //   }return str;
+      // } let s=cotChan(a);
+      // console.log(s);
+      // bài 9:Tính tổng các giá trị đường viền
+      //       let a = [
+      //         [1, 4, 3, 2, 6],
+      //         [1, 4, 3, 2, 6],
+      //         [1, 4, 3, 2, 6],
+      //         [1, 4, 3, 2, 6],
+      //       ];
+      //       function totalA(number){
+      //         let sum=0;
+      //    for(let i=0; i<number.length; i++){
+      //     for(let j=0; j<number[i].length; j++){
+      //         if((i==0) || (i==number.length-1) || (j==0 )|| (j==number[i].length-1)){
+      //          sum+=number[i][j];
+      //         }
+      //     }
+      // } return sum;
+      // } let s=totalA(a);
+      // console.log(s);
+      //bài 10:Tìm ra vị trí [i,j] của số chẵn đầu tiên
+      //   let a = [
+      //     [3, 1, 5, 3],
+      //     [4, 4, 2, 2],
+      //     [1, 1, 1, 1],
+      //     [3, 0, 3, 5],
+      //   ];
+      //   function viTri(number) {
+      //     for (let i = 0; i < number.length; i++) {
+      //       for (let j = 0; j < number[i].length; j++) {
+      //         if (number[i][j] % 2 === 0&& number[i][j]>0) {
+      //           return [i,j];
+      //         }
+      //       }
+      //     }
+      //   }
+      //   let s = viTri(a);
+      //   console.log(s);
+      //bài 11:Tính tổng các số nguyên tố trong mảng 2 chiều
+      //   let arr = [
+      //     [3, 1, 5, 3],
+      //     [4, 4, 2, 2],
+      //     [1, 1, 1, 1],
+      //     [3, 0, 3, 5],
+      //   ];
+      //   function sum(number) {
+      //     let sum1 = 0;
+      //     for (let i = 0; i < number.length; i++) {
+      //       for (let j = 0; j < number[i].length; j++) {
+      //         let a=true;
+      //         if(number[i][j]<2){
+      //             a=false;
+      //         }
+      //         for(let b=2;number[i][j]>b;b++){
+      //             if(number[i][j]%b==0){
+      //                 a=false;
+      //                 break;
+      //             }
+      //         }
+      //         if(a==true){
+      //             sum1+=number[i][j];
+      //         }
+      //       }
+      //     } return sum1;
+      //   }let c=sum(arr);
+      //   console.log(c);
+      //bài 12:Tính tổng: tam giác trên trái, trên phải, dưới trái, dưới phải
+      let arr = [
+        [3, 1, 5, 3],
+        [4, 4, 2, 2],
+        [1, 1, 1, 1],
+        [3, 0, 3, 5],
+      ];
+      function temp(number) {
+        // var sumTg1 = 0;
+        // var sumTg2=0;
+        // var sumTg3=0;
+        var sumTg4=0;
+        for (let i = 0; i < arr.length; i++) {
+          for (let j = 0; j < arr[i].length; j++) {
+            // if (i >= j) {
+            //   sumTg1 += arr[i][j];
+            // if((i+j)>=3){
+            //     sumTg2+=arr[i][j];
+            // if((i+j)<=3){
+            //     sumTg3+=arr[i][j];
+            if(i<=j){
+                sumTg4+=arr[i][j];
+            }
+            }
+          }// return sumTg1;
+        // return sumTg2;
+        // return sumTg3;
+        return sumTg4;
+        } let s = temp(arr);
+      console.log(s);
+    </script>
+  </body>
+</html>

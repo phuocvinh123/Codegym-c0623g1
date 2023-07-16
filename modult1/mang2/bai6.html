@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+//bài 1:
+//         let a = [
+//     [1, 2, 1, 24],
+//     [8, 11, 9, 4],
+//     [7, 0, 7, 27],
+//     [7, 4, 28, 14],
+//     [3, 10, 26, 7]
+// ];
+// let count='';
+// for(let i=0;i<a.length;i++){
+//     for(let j=0;j<a[i].length;j++){
+//         count += a[i][j] +" ";
+//     } count+="<br>"
+// }console.log(count);
+//bài 2:
+// let a=["a","b","c",1,3,4];
+// a.reverse();
+// console.log(a.join(","))
+//bài 3:
+// let a=["a","b","c",1,3,4]
+// let count=0;
+// for(let i=0;i<a.length;i++){
+//     if(!isNaN(a[i])){
+//         count++
+//     }
+// }console.log("số kí tự trong mảng là:"+count)
+//bài 4:
+// let a=[1,3,"a","b","c",5,6,7];
+// let count=0;
+// for (i=0;i<a.length;i++){
+//     if(typeof(a[i])==="number"){
+//         count++;
+//     }
+// }console.log("các số có trong mảng là:"+count)
+//bài 5:
+// let a=prompt("nhập 10 số đầu tiên để so sánh").split(",");
+// let b=prompt("nhập 10 số thứ hai để so sánh").split(",");
+// if(a.length!=b.length){
+// alert("a không bằng b");
+// }else{
+//     for(let i=0;i<a.length;i++){
+//         if(a[i]===b[i]){
+//             alert(a[i]+"="+b[i]);
+//         }else{
+//             alert(a[i]+"!="+b[i]);
+//         }
+//     }
+// }
+//bài 6:
+let a = prompt("Nhập số muốn chỉnh sửa").split(",");
+for (let i = 0; i < a.length; i++) {
+  if (a[i] === "-") {
+    a[i] = "_";
+  }
+}
+let result = a.join("");
+console.log(result);
+    </script>
+</body>
+</html>

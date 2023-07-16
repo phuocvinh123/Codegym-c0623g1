@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //bài 1:
+      // var a=[1,2,3,5,7,10,15,20,42,50];
+      // let count=0;
+      // for(let i=0;i<a.length;i++){
+      //     if(a[i]>=10){
+      //         count++;
+      //     }
+      // }console.log("giá trị trong mảng lớn hơn hoặc bằng 10 là"+ count)
+      //bài 2:
+      // var a=[3,5,34,43,7,8,4,9,10,21];
+      // let  max=a[0];
+      // let index=0;
+      // for(let i=0;i<a.length;i++){
+      //     if(a[i]>max){
+      //     max=a[i];
+      //     index=i;
+      // }
+      // }alert("số lớn nhất trong mảng là"+max+"ở vị trí "+index)
+      //bài 3:
+      //   var a = [3, 5, 34, 43, 7, 8, 4, 9, 10, 21];
+      //   let max = a[0];
+      //   let num = 0;
+      //   for (let i = 0; i < a.length; i++) {
+      //     if (a[i] > max) {
+      //       max = a[i];
+      //     }num += a[i];
+      //   }
+      //   alert("giá trị lớn nhất trong mảng là"+max + "giá trị trung bình là" + num);
+      //bài 4:
+      // let a=prompt("nhập vào mảng cách nhau bởi dấu phẩy").split(",");
+      //     a.reverse();
+      //    alert("mảng sau khi đảo ngược là:"+ a.join(","))
+      //bài 5:
+      // let a=[1,-2,3,-4,5,-6,7,-8,-9];
+      // let count=0;
+      //     for(let i=0;i<a.length;i++){
+      //         if(a[i]<0){
+      //             count++;
+      //         }
+      //     }alert("số giá trị âm trong mảng là:"+count)
+      //bài 6:
+      // var a=[3,5,34,43,7,8,4,9,10,21];
+      // let v=prompt("nhập số cần tìm trong mảng");
+      // for(let i=0;i<a.length;i++){
+      //     if(a[i]==v){
+      //        alert("V is in the array");
+      //        break;
+      //     }else{
+      //         alert("V is not in the array");
+      //         break;
+      //     }
+      // }
+      //bài 7:
+      //   var a = [3, 5, 34, 43, 7, 8, 4, 9, 10, 21];
+      //   let v = prompt("nhập số cần tìm trong mảng");
+      //   let found = false;
+      //   for (let i = 0; i < a.length; i++) {
+      //     if (a[i] == v) {
+      //       found = true;
+      //       for (let j = i; j < a.length - 1; j++) {
+      //         a[j] += a[j + 1];
+      //       }
+      //       a[a.length - 1] = 0;
+      //       alert(v + "có trong mảng và đã xóa khỏi" + a);
+      //       break;
+      //     }
+      //   }
+      //   if (!found) {
+      //     alert(v + "không có trong mảng");
+      //   }
+      //bài 8:
+      // let a= [];
+      // for(let i=1;i<=10;i++){
+      //    let b=+prompt("nhập 10 số nguyện bất kì trong chuỗi");
+      //     a.push(b)
+      // }
+      // a.sort(function(a,b){
+      //     return b-a;
+      // })
+      // alert("mảng đã được sắp xếp"+a.join())
+      //bài 9:
+      let a = [];
+      for (let i = 1; i <= 10; i++) {
+        let b = +prompt("nhập 10 số nguyên bất kì trong chuỗi đầu tiên");
+        a.push(b);
+      }
+      let c = [];
+      for (let i = 1; i <= 10; i++) {
+        let d = +prompt("nhập 10 số nguyên bất kì trong chuỗi thứ 2");
+        c.push(d);
+      }
+      let e=a.concat(c);
+      alert("mảng được ghép nối là:"+e.join(","))
+    </script>
+  </body>
+</html>

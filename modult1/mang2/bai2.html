@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <label>Nhập từ</label>
+    <input type="text" id="string" />
+    <button onclick="transcript()">dịch</button>
+    <p id="result"></p>
+    <script>
+      function transcript() {
+        let arr_A = ["characters", "maths", "chemistry","born"];
+        let arr_V = ["ký Tự", "toán", "hóa", "sinh"];
+        let string = document.getElementById("string").value;
+        let index_anh = 0;
+        let result = "";
+        for (let i = 0; i < arr_A.length; i++) {
+          if (string == arr_A[i]) {
+            index_anh = i;
+            for (let j = 0; j < arr_V.length; j++) {
+              if (index_anh == j) {
+                result = arr_V[j];
+              }
+            }
+          }
+        }
+        document.getElementById("result").innerHTML = result;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //bài 1:Tính tổng các giá trị lớn hơn giá trị đứng liền trước nó trong mảng 1 chiều các số thực
+      //   let a = [2.2, 3.4, 9.6, 7.8];
+      //   function sumA(number) {
+      //     let sum = 0;
+      //     for (let i = 0; i < number.length; i += 2) {
+      //       if (number[i] > number[i - 1]) {
+      //         sum += number[i];
+      //       }
+      //     }
+      //     return sum;
+      //   }
+      //   let s = sumA(a);
+      //   console.log(s);
+      //bài 2: Tính trung bình cộng các số dương trong mảng 1 chiều các số thực
+      //   let a = [1, 3, 6, 5, -3, 7, -6];
+      //   function sumA(number) {
+      //     let sum = 0;
+      //     for (let i = 0; i < number.length; i++) {
+      //       if (number[i] > 0) {
+      //         sum += number[i];
+      //       }
+      //     }
+      //     return sum;
+      //   }
+      //   let s = sumA(a);
+      //   console.log(s);
+      //bài 3:Đưa các số chia hết cho 3 về đầu mảng
+      // let a=[3,1,5,6,7,8,9];
+      // function arr(number){
+      //     let c=[];
+      //     for(let i=0;i<number.length;i++){
+      //         if(number[i]%3===0){
+      //         c.unshift(number[i]);
+      //         }else{
+      //             c.push(number[i]);
+      //         }
+      //     }return c;
+      // }let s=arr(a);
+      // console.log(s.join(","));
+      //bài 4:Đảo ngược mảng ban đầu
+      // let a=[3,1,5,6,7,8,9];
+      // function arr(number){
+      //     let c=[];
+      //     for(let i=0;i<number.length;i++){
+      //         if(number[i]%3===0){
+      //         c.unshift(number[i]);
+      //         }else{
+      //             c.unshift(number[i]);
+      //         }
+      //     }return c;
+      // }let s=arr(a);
+      // console.log(s.join(","));
+      //bài5:Hãy liệt kê các số trong mảng 1 chiều các số thực thuộc đoạn [x, y] cho trước
+      // let a=[1,3,5,7,9,2,4,6,8];
+      // function arr(number){
+      //     let x=3;
+      //     let y=7;
+      //     let result=[];
+      //     for(let i=0;i<number.length;i++){
+      //         if(number[i]>=x &&number[i]<=y){
+      //             result.push(number[i]);
+      //         }
+      //     }return result;
+      // }let c=arr(a);
+      // console.log(c);
+      //bài 6:Hãy liệt kê các giá trị trong mảng mà thỏa điều kiện lớn hơn giá trị tuyệt đối của giá trị đứng liền sau nó
+      //     let a=[1,2,3,4,5,4,8,9,6];
+      // function arr(number){
+      //     let str="";
+      //     for(let i=0;i<number.length;i++){
+      //         if(number[i]>number[i-1]){
+      //        str+=number[i];
+      //         }
+      //     }return str;
+      // }let c=arr(a);
+      // console.log(c);
+      //bài7:Hãy liệt kê các vị trí mà giá trị tại đó là số chính phương trong mảng 1 chiều các số nguyên
+      // let a = [1, 2, 3, 4, 5, 4, 8, 9, 6];
+      // function arr(number){
+      //   let sqrt=Math.sqrt(number);
+      //   return sqrt ===Math.floor(sqrt);
+      // }
+      // function arrCP(number){
+      //   let str=[];
+      //   for(let i=0;i<number.length;i++){
+      //     if(arr(number[i])){
+      //       str.push(number[i]);
+      //     }
+      //   } return str;
+      // } let c=arrCP(a);
+      // console.log(c);
+      //bài 8:Đếm số dương chia hết cho 7 trong mảng
+      // let a=[1,34,70,49,53,56,78.7];
+      // function arr(number){
+      //   let str=[];
+      //   for(let i=0;i<number.length;i++){
+      //     if(number[i]%7==0){
+      //       str+=number[i];
+      //     }
+      //   }return str;
+      // }let c=arr(a);
+      // console.log(c);
+      //bài 9:Đếm số nguyên tố trong mảng
+      // let a = [1, 2, 3, 4, 5, 4, 8, 9, 6];
+      // function arr(number) {
+      //   if (number < 2) {
+      //     return false;
+      //   }
+      //   for (let i = 2; i < number; i++) {
+      //     if (number % i == 0) {
+      //       return false;
+      //     }
+      //   }
+      //   return true;
+      // }
+      // function arr2(number) {
+      //   let str = [];
+      //   for (let i = 0; i < number.length; i++) {
+      //     if (arr(number[i])) {
+      //       str += number[i];
+      //     }
+      //   }
+      //   return str;
+      // }
+      // let c = arr2(a);
+      // console.log(c);
+      //bài 10:Hãy xác định số lượng phần tử kề nhau mà cả 2 đều chẵn
+      // let a = [1, 2, 3, 4, 5, 4, 8, 9, 6];
+      // function arr(number) {
+      //   let result = [];
+      //   for (let i = 0; i < number.length - 1; i++) {
+      //     if (number[i] % 2 === 0 && number[i + 1] % 2 === 0) {
+      //       result.push(number[i]);
+      //     }
+      //   }
+      //   return result;
+      // }
+      // let c = arr(a);
+      // console.log(c);
+      //bài 11:Kiểm tra mảng có đối xứng không? Có trả về 1, không có trả về 0
+      // let a = [1, 2, 3, 4, 5, 4, 8, 9, 6];
+      // let b = [9, 7, 5, 5, 6, 5, 7, 8, 9];
+      // function arr(number) {
+      //   let arr2 = number.reverse();
+      //   for (let i = 0; i < number.length; i++) {
+      //     if (number[i] !== arr2[i]) {
+      //       return false;
+      //     }
+      //   }
+      //   return true;
+      // }
+      // console.log(arr(a));
+      // console.log(arr(b));
+      //bài 12:Kiểm tra mảng có tăng dần hay không
+      // let a = [1, 2, 3, 4, 5, 4, 8, 9, 6];
+      // let b=[1,2,3,4,5,6,7,8,9];
+      // function arr(number){
+      //   for(let i=0; i<number.length;i++){
+      //     if(number[i]<number[i-1]){
+      //       return false;
+      //     }
+      //   }return true;
+      // }console.log(arr(a));
+      // console.log(arr(b));
+      //bài 13:Hãy cho biết tất cả các phần tử trong mảng a có nằm trong mảng b không
+      // let a = [1, 2, 3, 4, 5, 4, 8, 9, 6];
+      // let b=[1,2,3,4,5,6,7,8,9];
+      // function arr(a,b){
+      //   for(let i=0;i<a.length;i++){
+      //     if(b.indexOf(a[i])===-1){
+      //       return false;
+      //     }
+      //   }return true;
+      // }console.log(arr(a,b));
+      //bài 14:Kiểm tra ma trận 2 chiều có toàn dương hay không
+      // let a = [
+      //   [1, 2, 3],
+      //   [4, 2, 3],
+      //   [8, 6, 3],
+      // ];
+      // function arr(number) {
+      //   for (let i = 0; i < number.length; i++) {
+      //     for (let j = 0; j < number[i].length; j++) {
+      //       if (number[i][j] >= 0) {
+      //         return true;
+      //       }
+      //     }
+      //   }
+      //   return false;
+      // }
+      // console.log(arr(a));
+      // bài 15:Kiểm tra một cột ma trận có giảm dần hay không
+      // let a = [
+      //   [1, 2, 3],
+      //   [4, 2, 3],
+      //   [8, 6, 3],
+      // ];
+      // function arr(maxT) {
+      //   for (let i = 0; i < maxT.length; i++) {
+      //     if (maxT[i] > maxT[i - 1]) {
+      //       return false;
+      //     }
+      //   }
+      //   return true;
+      // }
+      // console.log(arr(a));
+      //bài 16:Kiểm tra ma trận có tồn tại số lẻ hay không
+      // let a = [
+      //   [1, 2, 3],
+      //   [4, 2, 3],
+      //   [8, 6, 3],
+      // ];
+      // function arr(number) {
+      //   let str = [];
+      //   for (let i = 0; i < number.length; i++) {
+      //     for (let j = 0; j < number[i].length; j++) {
+      //       if (number[i][j] % 2 !== 0) {
+      //         str += number[i][j];
+      //       }
+      //     }
+      //   }
+      //   return str;
+      // }
+      // console.log(arr(a));
+      //bài 17: Liệt kê các dòng giảm dần trong ma trận
+      let a = [
+        [1, 2, 3],
+        [4, 2, 3],
+        [8, 6, 3],
+      ];
+      function arr(number){
+        let total=0;
+        for(let i=0;i<number.length;i++){
+          for(let j=0;i<number[i].length;j++){
+            total+=number[i][j];
+            
+          }
+        }return total;
+      }console.log(arr(a));
+    </script>
+  </body>
+</html>
