@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let primeNumber = Number(prompt("nhập số bất kỳ để kiểm tra SNT"));
+      function isPrime(number) {
+        if (number < 2) {
+          return "không phải là số nguyên tố";
+        }
+        for (let i = 2; i < number.length; i++)
+          if (number % i == 0) {
+            return "không phải là số nguyên tố";
+          }
+        return "là số nguyên tố";
+      }
+      alert(isPrime(primeNumber));
+    </script>
+  </body>
+</html>

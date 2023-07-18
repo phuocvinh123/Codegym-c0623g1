@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arr1 = [3, 5, 1, 8, -3, 7, 8];
+      let arr2 = [7, 12, 6, 9, 20, 56, 89];
+      let arr3 = [];
+      let arr4 = [0, 0, 0, 0, 0, 0];
+      function min_arr(number){
+        let min=number[0];
+        for(let i=0;i<number.length;i++){
+            if(number[i]<min){
+                min=number[i]
+            }
+        }return min
+      }console.log(min_arr(arr1));
+      console.log(min_arr(arr2));
+      console.log(min_arr(arr3));
+      console.log(min_arr(arr4));  
+    </script>
+  </body>
+</html>

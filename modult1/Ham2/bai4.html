@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //bài 1:
+      // let a=Number(prompt("nhập số"));
+      // function arr(number){
+      //     return number*number;
+      // }alert(arr(a));
+      //bài 2:
+      // let a=Number(prompt("nhập bán kính"));
+      // function S(number){
+      //     return 3.14*number*number;
+      // }
+      // function CV(number){
+      //     return 2*3.14*number;
+      // }alert("diện tích hình tròn là:"+S(a));
+      // alert("chu vi hình tròn là:"+CV(a));
+      //bài 3:
+      // let a=Number(prompt("nhập số tính !"));
+      // function arr(number){
+      //     let giaiThua=1;
+      //         for(let i=1;i<=number;i++){
+      //             giaiThua*=i
+      //         }return giaiThua;
+      // }alert(a+"!="+arr(a));
+      //bài4:
+      // let a=prompt("nhập kí tự hoặc số");
+      // function arr(value) {
+      //    return !isNaN(value);
+      // }if(arr(a)){
+      //     alert(a+"là một số");
+      // }else{alert(a+"là một kí tự");}
+      //bài 5:
+      // let a=prompt("nhập 3 số bất kỳ").split(",");
+      // function arr(number){
+      //     let min=number[0];
+      //     for(let i=0;i<number.length;i++){
+      //         if(number[i]<min){
+      //             min=number[i];
+      //         }
+      //     }return min;
+      // }alert("số nhỏ nhất trong 3 số là:"+arr(a));
+      //bài 6:
+      // let a=Number(prompt("nhập số bất kỳ"));
+      // function arr(number){
+      //     if(number>0){
+      //         return true;
+      //     }return false;
+      // }alert(arr(a));
+      //bài 7:
+      // let a=prompt("nhập vào 2 số").split(",");
+      // function arr(number){
+      //     for(let i=0;i<number.length;i++){
+      //         let temp=number[0];
+      //         number[0]=number[1];
+      //         number[1]=temp;
+      //         return number;
+      //     }
+      // }alert("mảng sau khi đổi chổ là"+arr(a));
+      //bài 8:
+      // let a=prompt("nhập vào 2 số").split(",");
+      //     function arr(number){
+      //         return number.reverse();
+      //     }alert(arr(a));
+      //bài 9:
+      let a = prompt("nhập vào một mảng").split(",");
+      let b = prompt("nhập vào 1 số muốn tìm trong mảng");
+      function arr(arrA, arrB) {
+        let count = 0;
+        for (let i = 0; i < a.length; i++) {
+          if (arrA[i] === arrB) {
+            count++;
+          }
+        }
+        return count > 0 ? count : -1;
+      }
+      alert(arr(a, b));
+    </script>
+  </body>
+</html>
