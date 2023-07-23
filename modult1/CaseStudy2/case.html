@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management</title>
+    <link rel="stylesheet" href="/case.css">    
+</head>
+<body>
+        <div class="container">
+            <div class="myapp">
+                <div class="frmProduct">
+                    <h3 style="text-align: center;">Add new product</h3>
+                    <div class="row">
+                        <label for="">Product name</label>
+                        <input type="text" id="txtName" placeholder="Enter product name">
+                    </div>
+                    <div class="row">
+                        <label for="">Product decription</label>
+                        <input type="text" id="txtDescription" placeholder="Enter product description">
+                    </div>
+                    <div class="row">
+                        <label for="">Quantity</label>
+                        <input type="text" id="txtQuantity" placeholder="Enter product quantity">
+                    </div>
+                    <div class="row">
+                        <label for="">product pictures</label>
+                        <input type="text" id="txtPictures" placeholder="Enter product pictures">
+                    </div>
+                    <div class="row">
+                        <label for="">Price</label>
+                        <input type="number" id="txtPrice" placeholder="Enter product price">
+                    </div>
+                    <input id="txtId" type="hidden" />
+                    <div class="row">
+                        <label for=""></label>
+                        <button class="btn btn-success" id="btnAdd">Add</button>
+                        <button class="btn btn-success hide" id="btnUpdate">Update</button>
+                        <button class="btn btn-danger hide" id="btnCancel">Cancel</button>
+                    </div>
+                </div>
+                <div class="tbProduct">
+                    <h1 style="text-align: center;">Product Management</h1>
+                    <table>
+                        <div class="right-btn">
+                            <button onclick="remove()"><i class="fa-solid fa-trash"></i> Delete</button>
+                        </div>
+                        <tr>
+                            <td><input type="checkbox" id="checkbox1" onchange="checkbox1()" class="check-box"></td>
+                            <td>ID</td>
+                            <td width="130px">image</td>
+                            <td width="330px">Product name</td>
+                            <td>Description</td>
+                            <td>Quantity</td>
+                            <td>Price</td>
+                            <td class="last-col">Action</td>
+                        </tr>
+                        <tbody id="tb-body">
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div> 
+        <script src="/Study.js"></script>
+</body>
+</html>
