@@ -72,12 +72,4 @@ public class TimeView {
     }
 
 
-
-
-
-
-    public static void main(String[] args) {
-        TimeView timeView=new TimeView();
-        timeView.launcher();
-    }
 }

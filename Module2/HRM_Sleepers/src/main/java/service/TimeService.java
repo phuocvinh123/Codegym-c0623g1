@@ -4,8 +4,7 @@ import model.AdminModel;
 import model.TimeModel;
 import utils.FileUtils;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
@@ -24,10 +23,6 @@ public class TimeService {
 
     private final Scanner scanner = new Scanner(System.in);
 
-    public List<AdminModel> getAllAdmin() {
-        return FileUtils.readData(fileStaff, AdminModel.class);
-    }
-
     public void checkIn() {
         System.out.println("Check In - Nhập thông tin:");
         String staffId = "";
@@ -41,9 +36,11 @@ public class TimeService {
             for (AdminModel admin : adminList) {
                 if (String.valueOf(admin.getId()).equals(staffId)) {
                     foundStaffId = true;
-                    List<String> newData = new ArrayList<>();
-                    newData.add(staffId + "," + formattedTime + ",");
-                    writeData(fileTime, newData);
+                    try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileTime, true))) {
+                        writer.write(staffId + "," + formattedTime + ",");
+                    } catch (IOException e) {
+                        System.out.println("Lỗi khi ghi thông tin chấm công vào tệp tin.");
+                    }
                     System.out.println("Check In thành công!");
                     checkedInStaffId = staffId; // Lưu trữ mã nhân viên đã Check In thành công
                     break;
@@ -81,39 +78,41 @@ public class TimeService {
             }
         }
     }
-    public void totalTime() {
+    public Duration totalTime(String fileTime) {
         String staffId = enterStaffId(); // Yêu cầu người dùng nhập ID nhân viên
-        List<TimeModel> checkInData = readData(fileTime,TimeModel.class); // Đọc dữ liệu check-in và check-out từ file
-        if (checkInData.size() < 4) {
-            System.out.println("Nhân viên có mã id: " + staffId + " chưa có đủ thông tin check-in và check-out.");
-            return;
+        Duration totalWorkTime = Duration.ZERO;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileTime))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] tokens = line.split(",");
+                if (tokens.length >= 4) {
+                    String id = tokens[0];
+                    String checkInDate = tokens[1];
+                    String checkInTimeStr = tokens[2];
+                    String checkOutTimeStr = tokens[3];
+                    LocalDateTime checkInDateTime = LocalDateTime.parse(checkInDate + "," + checkInTimeStr, formatter);
+                    LocalDateTime checkOutDateTime = LocalDateTime.parse(checkInDate + "," + checkOutTimeStr, formatter);
+                    if (id.equals(staffId)) {
+                        Duration workDuration = Duration.between(checkInDateTime, checkOutDateTime);
+                        totalWorkTime = totalWorkTime.plus(workDuration);
+                    }
+                }
+            }
+
+            // In thông tin về thời gian làm việc của các ngày có cùng ID
+            System.out.println("Tổng thời gian làm việc của ID " + staffId + ": " + totalWorkTime.toHours() + "H, " + totalWorkTime.toMinutesPart() + " p");
+
+        } catch (IOException e) {
+            System.out.println("Lỗi khi đọc tệp tin.");
         }
-        long totalWorkingMinutes = 0;
 
-        for (int i = 2; i < checkInData.size(); i++) {
-            TimeModel timeModel = checkInData.get(i);
-            String checkInTimeString = timeModel.getStartTime();
-            String checkOutTimeString = timeModel.getEndTime();
-
-
-            Date checkInTime = (Date) formatter.parse(checkInTimeString);
-            Date checkOutTime = (Date) formatter.parse(checkOutTimeString);
-            long durationInMillis = checkOutTime.getTime() - checkInTime.getTime();
-            totalWorkingMinutes += durationInMillis / (1000 * 60); // Chuyển đổi sang phút và cộng vào tổng thời gian
-        }
-        long totalWorkingHours = totalWorkingMinutes / 60;
-        long remainingMinutes = totalWorkingMinutes % 60;
-
-        System.out.println("Thời gian làm việc của nhân viên với id: " + staffId + " là: " + totalWorkingHours + " giờ " + remainingMinutes + " phút");
-
-
+        return totalWorkTime;
     }
 
     public String enterStaffId() {
         System.out.print("Nhập ID nhân viên: ");
         return scanner.nextLine();
     }
-
-
 
 }

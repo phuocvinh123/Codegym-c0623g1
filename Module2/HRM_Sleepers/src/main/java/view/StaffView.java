@@ -20,8 +20,8 @@ public class StaffView {
             System.out.println("                                                           ║       Trang thông tin nhân viên            ║");
             System.out.println("                                                           ║      1. Xem thông tin nhân viên            ║");
             System.out.println("                                                           ║      2. Chấm công                          ║");
-            System.out.println("                                                           ║      3. Thay đổi thông tin nhân viên       ║");
-            System.out.println("                                                           ║      4. Hiển thị danh sách nhân viên       ║");
+            System.out.println("                                                           ║      3. Hiển thị tổng số thời gian làm việc║");
+            System.out.println("                                                           ║     trong 1 tháng                          ║");
             System.out.println("                                                           ║      5. Tìm kiếm nhân viên theo tên        ║");
             System.out.println("                                                           ║      6. Xắp xếp nhân viên                  ║");
             System.out.println("                                                           ║      0. Quay lại                           ║");
@@ -58,7 +58,7 @@ public class StaffView {
 
     private void hoursWorked() {
         TimeService timeService=new TimeService();
-        timeService.totalTime();
+        timeService.totalTime("./data/timekeeping.txt");
     }
 
     private void Timekeeping() {

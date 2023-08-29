@@ -5,6 +5,7 @@ import model.ERole;
 import model.LoginModel;
 import utils.FileUtils;
 import view.AdminView;
+import view.StaffView;
 
 import java.util.List;
 import java.util.Scanner;
@@ -73,7 +74,7 @@ public class LoginService implements ILoginService {
                     if (getUserRole(username) == ERole.USER) {
                         // Chuyển hướng đến trang người dùng
                         System.out.println("Chúc bạn có một ngày làm việc hiệu quả");
-                        AdminView staffView=new AdminView();
+                        StaffView staffView=new StaffView();
                         staffView.launcher();
                     } else if (getUserRole(username) == ERole.ADMIN) {
                         // Chuyển hướng đến trang quản trị viên
