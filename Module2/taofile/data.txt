@@ -1,0 +1,5 @@
+student:  name= 'Nguyễn Văn A', age= 21, mark= 8
+student:  name= 'Nguyễn Văn A', age= 21, mark= 8
+student:  name= 'Nguyễn Văn A', age= 21, mark= 8
+student:  name= 'Nguyễn Văn A', age= 21, mark= 8
+student:  name= 'Nguyễn Văn A', age= 21, mark= 8
