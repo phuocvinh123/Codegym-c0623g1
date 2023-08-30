@@ -13,7 +13,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class WageRange implements IParseModel<WageRange> {
-    private long id;
     private long idUser;
     private LocalDate time;
     private double wage;
@@ -22,12 +21,12 @@ public class WageRange implements IParseModel<WageRange> {
     @Override
     public WageRange parse(String line) {
         String[] items = line.split(",");
-        WageRange wageRange= new WageRange(Long.parseLong(items[0]),Long.parseLong(items[1]), DateUtils.parseDate(items[2]),Double.parseDouble(items[3]), DateUtils.parseDate(items[4]) );
+        WageRange wageRange= new WageRange(Long.parseLong(items[0]), DateUtils.parseDate(items[1]),Double.parseDouble(items[2]), DateUtils.parseDate(items[3]) );
         return wageRange;
     }
     @Override
     public String toString() {
-        return String.format("%s,%s,%s,%s,%s",this.id,this.idUser,DateUtils.formatDate(this.time),this.wage,this.month);
+        return String.format("%s,%s,%s,%s",this.idUser,DateUtils.formatDate(this.time),this.wage,this.month);
     }
 
 }

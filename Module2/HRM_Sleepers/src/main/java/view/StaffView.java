@@ -57,8 +57,8 @@ public class StaffView {
     }
 
     private void hoursWorked() {
-        TimeService timeService=new TimeService();
-        timeService.totalTime("./data/timekeeping.txt");
+        TimeView timeView = new TimeView();
+        timeView.totalTime();
     }
 
     private void Timekeeping() {
