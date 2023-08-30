@@ -22,8 +22,8 @@ public class StaffView {
             System.out.println("                                                           ║      2. Chấm công                          ║");
             System.out.println("                                                           ║      3. Hiển thị tổng số thời gian làm việc║");
             System.out.println("                                                           ║     trong 1 tháng                          ║");
-            System.out.println("                                                           ║      5. Tìm kiếm nhân viên theo tên        ║");
-            System.out.println("                                                           ║      6. Xắp xếp nhân viên                  ║");
+            System.out.println("                                                           ║      4. Tính lương                         ║");
+            System.out.println("                                                           ║      5.Hiển thị tổng giơf làm              ║");
             System.out.println("                                                           ║      0. Quay lại                           ║");
             System.out.println("                                                           ╚════════════════════════════════════════════╝");
             int actionMenu = Integer.parseInt(scanner.nextLine());
@@ -35,18 +35,18 @@ public class StaffView {
                     showStaff();
                 }
                 case 2 -> {
+                    showStaff();
                     Timekeeping();
                 }
                 case 3 -> {
                     hoursWorked();
                 }
-//                case 4 -> {
-//                    showStaff();
-//                }
-//                case 5 -> {
-//                    showStaff();
-//                    searchStaffs();
-//                }
+                case 4 -> {
+                    Payroll();
+                }
+                case 5 -> {
+                    showTiem();
+                }
 //                case 6 -> {
 //                    sortStaff();
 //                }
@@ -54,6 +54,16 @@ public class StaffView {
 //                }
             }
         }
+    }
+
+    private void showTiem() {
+        TimeView timeView=new TimeView();
+        timeView.totalTime();
+    }
+
+    private void Payroll() {
+        WageView wageView=new WageView();
+        wageView.Wage();
     }
 
     private void hoursWorked() {
@@ -67,7 +77,8 @@ public class StaffView {
     }
 
     private void showStaff() {
-
+    AdminView adminView=new AdminView();
+    adminView.showStaff();
     }
 
     private void menu() {

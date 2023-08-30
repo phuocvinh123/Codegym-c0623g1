@@ -19,9 +19,7 @@ public class LoginService implements ILoginService {
     public List<LoginModel> getAllLogin() {
         return FileUtils.readData(fileLogin, LoginModel.class);
     }
-    public List<AdminModel> getAllAdmin() {
-        return FileUtils.readData(fileStaff, AdminModel.class);
-    }
+
 
 
     private String userName() {
@@ -36,7 +34,7 @@ public class LoginService implements ILoginService {
                 }
                 check = true;
             } catch (IllegalArgumentException e) {
-                System.out.println("Error: " + e.getMessage());
+                System.err.println("Error: " + e.getMessage());
             }
         } while (!check);
         return username;
@@ -54,7 +52,7 @@ public class LoginService implements ILoginService {
                 }
                 check = true;
             } catch (IllegalArgumentException e) {
-                System.out.println("Error: " + e.getMessage());
+                System.err.println("Error: " + e.getMessage());
             }
         } while (!check);
         return password;
@@ -84,10 +82,10 @@ public class LoginService implements ILoginService {
                     }
                     check = true;
                 } else {
-                    System.out.println("Đăng nhập thất bại!");
+                    System.err.println("Đăng nhập thất bại!");
                 }
             } catch (IllegalArgumentException e) {
-                System.out.println("Lỗi: " + e.getMessage());
+                System.err.println("Lỗi: " + e.getMessage());
             }
         } while (!check);
     }

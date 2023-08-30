@@ -1,8 +1,8 @@
-package service;
+package view;
 
 import model.ERole;
-import model.LoginModel;
 import model.RegisterModel;
+import service.IRegisterService;
 import utils.DateUtils;
 import utils.FileUtils;
 
@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
-public class RegisterService implements IRegisterService {
+public class RegisterView implements IRegisterService {
     private final String fileLogin = "./data/login.txt";
     private Scanner scanner = new Scanner(System.in);
 
@@ -21,8 +21,6 @@ public class RegisterService implements IRegisterService {
 
     public void register() {
         System.out.println("Đăng ký mới người dùng:");
-
-        // Nhập thông tin người dùng
         String username = enterUsername();
         String password = enterPassword();
         ERole role= ERole.valueOf(enterErole());
@@ -86,7 +84,7 @@ private String enterErole() {
                 }
                 check = true;
             } catch (IllegalArgumentException e) {
-                System.out.println("Error: " + e.getMessage());
+                System.err.println("Error: " + e.getMessage());
             }
         } while (!check);
         return username;
@@ -101,7 +99,7 @@ private String enterErole() {
                     throw new IllegalArgumentException("Invalid email");
                 }check=true;
             }catch (IllegalArgumentException e){
-                System.out.println("Lỗi: "+e.getMessage());
+                System.err.println("Lỗi: "+e.getMessage());
             }
         }while (!check);
         return email;
@@ -109,7 +107,7 @@ private String enterErole() {
     public LocalDate enterBirtDay(){
         LocalDate dob = null;
         try{
-            System.out.println("Nhập ngày sinh: (dd-MM-yyyy)");
+            System.err.println("Nhập ngày sinh: (dd-MM-yyyy)");
             dob = DateUtils.parseDate(scanner.nextLine());
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -126,7 +124,7 @@ private String enterErole() {
                     throw new IllegalArgumentException("phone number must start tape 02,03,05,07,08,09 and enough 10 numbers");
                 }check=true;
             }catch (IllegalArgumentException e){
-                System.out.println("Lỗi: "+e.getMessage());
+                System.err.println("Lỗi: "+e.getMessage());
             }
         }while (!check);
         return phone;
@@ -143,7 +141,7 @@ private String enterErole() {
                 }
                 check = true;
             } catch (IllegalArgumentException e) {
-                System.out.println("Error: " + e.getMessage());
+                System.err.println("Error: " + e.getMessage());
             }
         } while (!check);
         return password;

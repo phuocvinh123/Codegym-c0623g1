@@ -2,7 +2,6 @@ package view;
 
 import service.ILoginService;
 import service.LoginService;
-import service.RegisterService;
 
 import java.util.Scanner;
 
@@ -36,7 +35,7 @@ public class LoginView {
         loginService.login();
     }
     public void menuRegister(){
-        RegisterService registerService=new RegisterService();
+        RegisterView registerService=new RegisterView();
         registerService.register();
     }
 

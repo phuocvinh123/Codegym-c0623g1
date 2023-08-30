@@ -3,6 +3,7 @@ package service;
 import model.AdminModel;
 import model.TimeModel;
 import utils.FileUtils;
+import view.TimeView;
 
 import java.io.*;
 import java.text.ParseException;
@@ -18,6 +19,7 @@ import static utils.FileUtils.writeData;
 public class TimeService {
     private final String fileTime = "./data/timekeeping.txt";
     private final String fileStaff = "./data/staff.txt";
+
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy,HH:mm:ss");
     private static String checkedInStaffId = "";
     public String checkIntTime(String staffId ){
@@ -31,7 +33,7 @@ public class TimeService {
                 try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileTime, true))) {
                     writer.write(staffId + "," + formattedTime + ",");
                 } catch (IOException e) {
-                    System.out.println("Lỗi khi ghi thông tin chấm công vào tệp tin.");
+                    System.err.println("Lỗi khi ghi thông tin chấm công vào tệp tin.");
                 }
                 System.out.println("Check In thành công!");
                 checkedInStaffId = staffId; // Lưu trữ mã nhân viên đã Check In thành công
@@ -39,7 +41,7 @@ public class TimeService {
             }
         }
         if (!foundStaffId) {
-            System.out.println("Mã nhân viên không tồn tại. Vui lòng nhập lại.");
+            System.err.println("Mã nhân viên không tồn tại. Vui lòng nhập lại.");
         }
         return  checkedInStaffId;
     }
@@ -53,7 +55,7 @@ public class TimeService {
                 fileWriter.close();
                 System.out.println("Check Out thành công!");
             } catch (IOException e) {
-                System.out.println("Lỗi: " + e.getMessage());
+                System.err.println("Lỗi: " + e.getMessage());
             }
         } else {
             System.out.println("Giờ check-out không được để trống. Vui lòng nhập lại.");
@@ -88,6 +90,41 @@ public class TimeService {
 
         return totalWorkTime;
     }
+    public int calculateSalary(String fileTime, String staffId, double wageMultiplier) {
+        Duration totalWorkTime = Duration.ZERO;
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileTime))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                // Xử lý dữ liệu từ file
+                String[] tokens = line.split(",");
+                if (tokens.length >= 4) {
+                    String id = tokens[0];
+                    String checkInDate = tokens[1];
+                    String checkInTimeStr = tokens[2];
+                    String checkOutTimeStr = tokens[3];
+                    LocalDateTime checkInDateTime = LocalDateTime.parse(checkInDate + "," + checkInTimeStr, formatter);
+                    LocalDateTime checkOutDateTime = LocalDateTime.parse(checkInDate + "," + checkOutTimeStr, formatter);
+                    if (id.equals(staffId)) {
+                        Duration workDuration = Duration.between(checkInDateTime, checkOutDateTime);
+                        totalWorkTime = totalWorkTime.plus(workDuration);
+                    }
+                }
+                // Tính thời gian làm việc và cộng dồn
+            }
+            // Tính lương dựa trên tổng thời gian làm việc và hệ số lương
+            int salary = (int) (totalWorkTime.toHours() * wageMultiplier);
+
+            // In thông tin về lương
+            System.out.println("Lương của nhân viên có ID " + staffId + ": " + salary);
+
+            return salary;
+        } catch (IOException e) {
+            System.out.println("Lỗi khi đọc tệp tin.");
+        }
+
+        return 0;
+    }
+
 
     }
 

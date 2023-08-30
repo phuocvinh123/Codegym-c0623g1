@@ -19,7 +19,7 @@ public class GetValue extends AdminModel {
                 }
                 check = true;
             } catch (IllegalArgumentException e) {
-                System.out.println("Lỗi: " + e.getMessage());
+                System.err.println("Lỗi: " + e.getMessage());
             }
         } while (!check);
         return name;
@@ -35,7 +35,7 @@ public class GetValue extends AdminModel {
                 check=true;
 
             }catch (IllegalArgumentException e){
-                System.out.println("Lỗi: "+e.getMessage());
+                System.err.println("Lỗi: "+e.getMessage());
             }
         }while (!check);
         String str = "";
@@ -59,7 +59,7 @@ public class GetValue extends AdminModel {
                 }
                 check = true;
             } catch (IllegalArgumentException e) {
-                System.out.println("Error: " + e.getMessage());
+                System.err.println("Error: " + e.getMessage());
             }
         } while (!check);
 
@@ -67,9 +67,9 @@ public class GetValue extends AdminModel {
         if (position != null) {
             switch (position) {
                 case "0" -> strType = "Staff Serve";
-                case "1" -> strType = "Staff Serving Food";
-                case "2" -> strType = "Staff receptionist";
-                case "3" -> strType = "Regional Chief";
+                case "1" -> strType = "ServingFood";
+                case "2" -> strType = "receptionist";
+                case "3" -> strType = "RegionalChief";
                 case "4" -> strType = "Manager";
             }
         }
@@ -87,7 +87,7 @@ public class GetValue extends AdminModel {
                 check=true;
 
             }catch (IllegalArgumentException e){
-                System.out.println("Lỗi: "+e.getMessage());
+                System.err.println("Lỗi: "+e.getMessage());
             }
         }while (!check);
         return cccd;
@@ -103,7 +103,7 @@ public class GetValue extends AdminModel {
                 }
                 check = true;
             } catch (IllegalArgumentException e) {
-                System.out.println("Lỗi: " + e.getMessage());
+                System.err.println("Lỗi: " + e.getMessage());
             }
         }while (!check);
         return address;
@@ -117,7 +117,7 @@ public class GetValue extends AdminModel {
                     throw new IllegalArgumentException("phone number must start tape 02,03,05,07,08,09 and enough 10 numbers");
                 }check=true;
             }catch (IllegalArgumentException e){
-                System.out.println("Lỗi: "+e.getMessage());
+                System.err.println("Lỗi: "+e.getMessage());
             }
         }while (!check);
         return phone;
@@ -131,7 +131,7 @@ public class GetValue extends AdminModel {
                     throw new IllegalArgumentException("Invalid email");
                 }check=true;
             }catch (IllegalArgumentException e){
-                System.out.println("Lỗi: "+e.getMessage());
+                System.err.println("Lỗi: "+e.getMessage());
             }
         }while (!check);
         return email;
@@ -151,7 +151,7 @@ public class GetValue extends AdminModel {
             } catch (IllegalArgumentException e) {
                 System.out.println("Error: " + e.getMessage());
             } catch (Exception e) {
-                System.out.println("Invalid input. Please enter a valid age.");
+                System.err.println("Invalid input. Please enter a valid age.");
                 scanner.nextLine(); // Clear the input buffer
             }
         } while (!check);
@@ -169,41 +169,5 @@ public class GetValue extends AdminModel {
         return dob;
     }
 
-//    public static double getWorking(String workString){
-//        System.out.println("Enter to working hours");
-//        double work=scanner.nextDouble();
-//        return work;
-//    }
-//    public static double getWage(String wageString){
-//        boolean check = false;
-//        double wage = 0;
-//
-//        do {
-//            System.out.println("Enter a number between 0 and 4:");
-//            try {
-//                wage = scanner.nextDouble();
-//                scanner.nextLine();
-//                if (!(wage >= 0 && wage <= 4)) {
-//                    throw new IllegalArgumentException("Invalid number entered. Please re-enter. (0-4)");
-//                }
-//                check = true;
-//            } catch (IllegalArgumentException e) {
-//                System.out.println("Error: " + e.getMessage());
-//            } catch (Exception e) {
-//                System.out.println("Invalid input. Please enter a valid number.");
-//                scanner.nextLine(); // Clear the input buffer
-//            }
-//        } while (!check);
-//        int wageAmount = switch ((int) wage) {
-//            case 0 -> 15000;
-//            case 1 -> 16000;
-//            case 2 -> 20000;
-//            case 3 -> 25000;
-//            case 4 -> 35000;
-//            default -> 0;
-//        };
-//
-//        return wageAmount;
-//    }
 
 }

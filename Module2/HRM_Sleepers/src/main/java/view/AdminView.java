@@ -31,6 +31,7 @@ public class AdminView {
             System.out.println("                                                           ║      4. Hiển thị danh sách nhân viên       ║");
             System.out.println("                                                           ║      5. Tìm kiếm nhân viên theo tên        ║");
             System.out.println("                                                           ║      6. Xắp xếp nhân viên                  ║");
+            System.out.println("                                                           ║      7. Hiển thị lương của tất cả nhân viên║");
             System.out.println("                                                           ║      0. Quay lại                           ║");
             System.out.println("                                                           ╚════════════════════════════════════════════╝");
             int actionMenu = Integer.parseInt(scanner.nextLine());
@@ -56,11 +57,19 @@ public class AdminView {
                 }
                 case 6 -> {
                     sortStaff();
+                }case 7 -> {
+                    showWage();
                 }
                 default -> {
+                    return;
                 }
             }
         }
+    }
+
+    private void showWage() {
+        WageView wageView=new WageView();
+        wageView.showWage();
     }
 
     private void searchStaffs() {

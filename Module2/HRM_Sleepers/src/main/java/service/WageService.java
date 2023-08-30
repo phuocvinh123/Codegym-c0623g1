@@ -1,77 +1,71 @@
 package service;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import model.AdminModel;
+import model.WageRange;
+import utils.FileUtils;
+
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.time.Duration;
+import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 public class WageService {
     private final String fileStaff = "./data/staff.txt";
-    private final String fileTime = "./data/timekeeping.txt";
     private final String fileWage = "./data/wage.txt";
-    private Map<String, Integer> wageMap;
 
-    public Map<String, Integer> readStaffFile() {
-        try {
-            File staffFile = new File(fileStaff);
-            Scanner staffScanner = new Scanner(staffFile);
-            Map<String, Integer> staffWageMap = new HashMap<>();
 
-            while (staffScanner.hasNextLine()) {
-                String line = staffScanner.nextLine();
+    public List<WageRange> getAllWage() {
+        return FileUtils.readData(fileWage, WageRange.class);
+    }
+    public String getJobTitleFromStaffFile(String staffId) {
+        String jobTitle = null;
+        try (BufferedReader br = new BufferedReader(new FileReader(fileStaff))) {
+            String line;
+            while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
-                if (data.length >= 2) {
-                    String staffId = data[0].trim();
-                    String jobTitle = data[1].trim();
-                    staffWageMap.put(staffId, wageMap.getOrDefault(jobTitle, 0));
+                if (data.length >= 3) {
+                    String id = data[0].trim();
+                    if (id.equals(staffId)) {
+                        jobTitle = data[1].trim();
+                        break;
+                    }
                 }
             }
-
-            staffScanner.close();
-            return staffWageMap;
-        } catch (FileNotFoundException e) {
-            System.out.println("Staff file not found: " + e.getMessage());
-            return null;
-        }
-    }
-
-    public Map<String, Integer> readTimekeepingFile() {
-        try {
-            File timeFile = new File(fileTime);
-            Scanner timeScanner = new Scanner(timeFile);
-            Map<String, Integer> timekeepingMap = new HashMap<>();
-
-            while (timeScanner.hasNextLine()) {
-                String line = timeScanner.nextLine();
-                String[] data = line.split(",");
-                if (data.length >= 2) {
-                    String staffId = data[0].trim();
-                    int hoursWorked = Integer.parseInt(data[1].trim());
-                    timekeepingMap.put(staffId, hoursWorked);
-                }
-            }
-
-            timeScanner.close();
-            return timekeepingMap;
-        } catch (FileNotFoundException e) {
-            System.out.println("Timekeeping file not found: " + e.getMessage());
-            return null;
-        }
-    }
-
-    public void writeWageFile(double totalWage) {
-        try {
-            File wageFile = new File(fileWage);
-            FileWriter writer = new FileWriter(wageFile);
-            writer.write("Total wage: " + totalWage);
-            writer.close();
-            System.out.println("Wage file written successfully.");
         } catch (IOException e) {
-            System.out.println("Error writing wage file: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return jobTitle;
+    }
+    public void saveWageToFile(String staffId, double workHours, double wage, String date) {
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(fileWage));
+
+            boolean found = false;
+            for (int i = 0; i < lines.size(); i++) {
+                String line = lines.get(i);
+                String[] data = line.split(",");
+                if (data.length >= 4 && data[0].trim().equals(staffId)) {
+                    lines.set(i, staffId + "," + workHours + "," + wage + "," + date);
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) {
+                String newLine = staffId + "," + workHours + "," + wage + "," + date;
+                lines.add(newLine);
+            }
+            Files.write(Paths.get(fileWage), lines);
+        } catch (IOException e) {
+            System.err.println("Lỗi khi ghi dữ liệu lương vào tệp tin.");
         }
     }
+
+
 
 }

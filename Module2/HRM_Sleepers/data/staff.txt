@@ -3,5 +3,5 @@
 10032,servingFood,dat pham,19,Male,18-05-2003,123324654678,0783245678,12 An dương vương,tan@gmail.com,USER
 10043,servingFood,Ba Tuong,19,Male,18-05-2003,123324654678,0783245678,12 An dương vương,tan@gmail.com,USER
 10054,Manager,quangdang,21,Male,18-05-2003,123456789012,0702506939,phú an phú vang,phuocvinh@gmail.com,ADMIN
-19885,Regional Chief,Hoàng Thị Phương,21,Femail,24-03-2002,123456345126,0775543234,12 Trần Phú,Phuong@gmail.com,USER
+19885,RegionalChief,Hoàng Thị Phương,21,Femail,24-03-2002,123456345126,0775543234,12 Trần Phú,Phuong@gmail.com,USER
 71071,Manager,Phuocvinh,21,Male,15-10-2002,123321123321,0702506939,12 An dương vương,p@gmail.com,ADMIN

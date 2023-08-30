@@ -70,12 +70,7 @@ public class AdminService implements IAminService {
             if (!email.isEmpty()) {
                 staffUpDate.setEmail(email);
             }
-
-
             // Cập nhật danh sách nhân viên
-//            List<Staff> updatedStaff = staffs.stream()
-//                    .map(u -> u.getId() == id ? staffUpDate : u)
-//                    .collect(Collectors.toList());
             FileUtils.writeData(fileStaff, staffs);
             System.out.println("Đã cập nhật thông tin nhân viên!");
         } else {

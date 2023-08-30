@@ -5,7 +5,9 @@ import service.IAminService;
 import service.TimeService;
 
 import java.io.*;
+import java.time.DayOfWeek;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -71,24 +73,8 @@ public class TimeView {
     }
 
 
-//    private void checkIn() {
-//        AdminView adminView=new AdminView();
-//        adminView.showStaff();
-//        TimeService timeService=new TimeService();
-//        timeService.checkIn();
-//        checkOut1();
-//    }
-//
-//    private void checkOut() {
-//        TimeService timeService=new TimeService();
-//        timeService.checkOut();
-//        StaffView staffView=new StaffView();
-//        staffView.launcher();
-//    }
-
-
     public void checkIn() {
-        AdminView adminView=new AdminView();
+        AdminView adminView = new AdminView();
         adminView.showStaff();
         System.out.println("Check In - Nhập thông tin:");
         String staffId = "";
@@ -112,10 +98,31 @@ public class TimeView {
         StaffView staffView = new StaffView();
         staffView.launcher();
     }
+    public void overtime() {
+        double overtimeWage;
+        LocalDate date = LocalDate.now(); // Lấy ngày hiện tại
+
+        DayOfWeek dayOfWeek = date.getDayOfWeek();
+
+        if (dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY) {
+            overtimeWage = 70.0; // Mức lương tăng ca cuối tuần
+        } else {
+            overtimeWage = 50.0; // Mức lương tăng ca ngày thường
+        }
+
+        // Tiếp tục xử lý đăng ký tăng ca với mức lương overtimeWage
+        checkOvertime(overtimeWage);
+    }
+    private void checkOvertime(double overtimeWage) {
+        // Xử lý đăng ký tăng ca với mức lương overtimeWage
+        // ...
+    }
+
     public void totalTime() {
         String staffId = enterStaffId(); // Yêu cầu người dùng nhập ID nhân viên
-        timeService.totalTime("./data/timekeeping.txt",staffId);
+        timeService.totalTime("./data/timekeeping.txt", staffId);
     }
+
     public String enterStaffId() {
         System.out.print("Nhập ID nhân viên: ");
         return scanner.nextLine();
