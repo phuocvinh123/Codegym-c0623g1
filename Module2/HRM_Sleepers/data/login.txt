@@ -1,4 +1,4 @@
 phuocvinh,Phuocvinh123,ADMIN,15-10-2002,0702506939,phuocvinh@gmai.com
 quangdang,Quangdang123,ADMIN,21-12-1994,0702345678,quang@gmail.com
-truongle,Phuocvinh123,USER,15-10-2002,0702506939,phuocvinh@gmai.com
+tuongle,Tuongle123,USER,15-10-2002,0702506939,tuongle@gmai.com
 longnguyen,Longnguyen123,ADMIN,21-12-1997,0823456789,long@gmail.com

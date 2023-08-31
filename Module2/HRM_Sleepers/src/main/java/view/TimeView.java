@@ -2,6 +2,7 @@ package view;
 
 import model.AdminModel;
 import service.IAminService;
+import service.OvertimeService;
 import service.TimeService;
 
 import java.io.*;
@@ -10,16 +11,19 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import static utils.FileUtils.readData;
 
 public class TimeView {
     private Scanner scanner = new Scanner(System.in);
-
+    private String currentStaffId;
     private static String checkedInStaffId = "";
     TimeService timeService = new TimeService();
+    OvertimeView overtimeView=new OvertimeView();
 
     public void launcher() {
         boolean checkAction = false;
@@ -95,32 +99,24 @@ public class TimeView {
         System.out.print("Giờ check-out (HH:mm:ss): ");
         checkOutTime = scanner.nextLine();
         timeService.checkOutTime(checkOutTime);
-        StaffView staffView = new StaffView();
-        staffView.launcher();
-    }
-    public void overtime() {
-        double overtimeWage;
-        LocalDate date = LocalDate.now(); // Lấy ngày hiện tại
-
-        DayOfWeek dayOfWeek = date.getDayOfWeek();
-
-        if (dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY) {
-            overtimeWage = 70.0; // Mức lương tăng ca cuối tuần
+        System.out.print("Bạn có muốn tăng ca không? (yes/no): ");
+        String answer = scanner.nextLine();
+        if (answer.equalsIgnoreCase("yes")) {
+            overtimeView.overtime(checkedInStaffId);
         } else {
-            overtimeWage = 50.0; // Mức lương tăng ca ngày thường
+            StaffView staffView = new StaffView();
+            staffView.launcher();
         }
-
-        // Tiếp tục xử lý đăng ký tăng ca với mức lương overtimeWage
-        checkOvertime(overtimeWage);
-    }
-    private void checkOvertime(double overtimeWage) {
-        // Xử lý đăng ký tăng ca với mức lương overtimeWage
-        // ...
     }
 
     public void totalTime() {
         String staffId = enterStaffId(); // Yêu cầu người dùng nhập ID nhân viên
         timeService.totalTime("./data/timekeeping.txt", staffId);
+    }
+    public void toatalOverTime(){
+        String staffId = enterStaffId();
+        OvertimeService overtimeService=new OvertimeService();
+        overtimeService.calculateTotalSalary("./data/overtime.txt",staffId);
     }
 
     public String enterStaffId() {
@@ -128,5 +124,9 @@ public class TimeView {
         return scanner.nextLine();
     }
 
+    public static void main(String[] args) {
+        TimeView timeView =new TimeView();
+        timeView.checkOut();
+    }
 
 }

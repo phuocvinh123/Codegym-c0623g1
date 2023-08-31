@@ -119,7 +119,7 @@ public class TimeService {
 
             return salary;
         } catch (IOException e) {
-            System.out.println("Lỗi khi đọc tệp tin.");
+            System.err.println("Lỗi khi đọc tệp tin.");
         }
 
         return 0;

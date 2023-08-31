@@ -23,7 +23,7 @@ public class StaffView {
             System.out.println("                                                           ║      3. Hiển thị tổng số thời gian làm việc║");
             System.out.println("                                                           ║     trong 1 tháng                          ║");
             System.out.println("                                                           ║      4. Tính lương                         ║");
-            System.out.println("                                                           ║      5.Hiển thị tổng giơf làm              ║");
+            System.out.println("                                                           ║      5.Hiển thị tổng giờ làm               ║");
             System.out.println("                                                           ║      0. Quay lại                           ║");
             System.out.println("                                                           ╚════════════════════════════════════════════╝");
             int actionMenu = Integer.parseInt(scanner.nextLine());
