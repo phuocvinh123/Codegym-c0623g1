@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 
 public class AdminService implements IAminService {
     private final String fileStaff="./data/staff.txt";
-    Scanner scanner=new Scanner(System.in);
     @Override
     public List<AdminModel> getAllStaff() {
         return FileUtils.readData(fileStaff, AdminModel.class);
@@ -30,7 +29,6 @@ public class AdminService implements IAminService {
                 .filter(s -> s.getId() == id)
                 .findFirst()
                 .orElse(null);
-
         if (staffUpDate != null) {
             System.out.println("Nhập thông tin mới: ");
             String pos = GetValue.getPosition("");

@@ -9,19 +9,14 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.Duration;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class WageService {
     private final String fileStaff = "./data/staff.txt";
     private final String fileWage = "./data/wage.txt";
+    private final String fileTime = "./data/timekeeping.txt";
 
 
-    public List<WageRange> getAllWage() {
-        return FileUtils.readData(fileWage, WageRange.class);
-    }
     public String getJobTitleFromStaffFile(String staffId) {
         String jobTitle = null;
         try (BufferedReader br = new BufferedReader(new FileReader(fileStaff))) {
@@ -65,7 +60,28 @@ public class WageService {
             System.err.println("Lỗi khi ghi dữ liệu lương vào tệp tin.");
         }
     }
+//dùng để lấy danh sách tất cả các ID của nhân viên trong filetime
+    public List<String> getAllStaffIds() {
+        List<String> staffIds = new ArrayList<>();
 
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(fileTime));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] data = line.split(",");
+                if (data.length >= 1) {
+                    String staffId = data[0].trim();
+                    if (!staffIds.contains(staffId)) {
+                        staffIds.add(staffId);
+                    }
+                }
+            }
+            reader.close();
+        } catch (IOException e) {
+            System.err.println("Đã xảy ra lỗi trong quá trình đọc tệp: " + e.getMessage());
+        }
 
+        return staffIds;
+    }
 
 }

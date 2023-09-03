@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import utils.AppConstant;
 import utils.DateUtils;
 
 import java.time.LocalDate;
@@ -23,7 +24,6 @@ public class AdminModel implements IParseModel<AdminModel>{
     private String address;
     private String email;
     private ERole role;
-//    private TimeKeeping timeKeeping;
 
 
     public AdminModel(long id, String position, String fullName, int age, String gender, LocalDate birthday, String cccd, String phone, String address, String email) {
@@ -42,7 +42,7 @@ public class AdminModel implements IParseModel<AdminModel>{
     @Override
     public AdminModel parse(String line) {
         //1,servingFood,Tấn Tây,19,male,2003-05-18,123324654678,0783245678,12 An dương vương,tan@gmail.com,230,16000
-        String[] items = line.split(",");
+        String[] items = line.split(AppConstant.SPLIT_ITEM_FILE);
         AdminModel s=new AdminModel(Long.parseLong(items[0]),
                 items[1],
                 items[2],

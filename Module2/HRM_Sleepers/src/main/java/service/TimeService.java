@@ -1,20 +1,14 @@
 package service;
 
 import model.AdminModel;
-import model.TimeModel;
-import utils.FileUtils;
-import view.TimeView;
 
 import java.io.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import static utils.FileUtils.readData;
-import static utils.FileUtils.writeData;
 
 public class TimeService {
     private final String fileTime = "./data/timekeeping.txt";
@@ -58,10 +52,10 @@ public class TimeService {
                 System.err.println("Lỗi: " + e.getMessage());
             }
         } else {
-            System.out.println("Giờ check-out không được để trống. Vui lòng nhập lại.");
+            System.err.println("Giờ check-out không được để trống. Vui lòng nhập lại.");
         }
     }
-    public Duration totalTime(String fileTime,String staffId) {
+    public Duration totalTime(String fileTime, String staffId) {
         Duration totalWorkTime = Duration.ZERO;
         try (BufferedReader reader = new BufferedReader(new FileReader(fileTime))) {
             String line;
@@ -80,22 +74,27 @@ public class TimeService {
                     }
                 }
             }
-
-            // In thông tin về thời gian làm việc của các ngày có cùng ID
-            System.out.println("Tổng thời gian làm việc của ID " + staffId + ": " + totalWorkTime.toHours() + "H, " + totalWorkTime.toMinutesPart() + " p");
-
         } catch (IOException e) {
-            System.out.println("Lỗi khi đọc tệp tin.");
+            System.err.println("Lỗi khi đọc tệp tin.");
         }
-
         return totalWorkTime;
     }
-    public int calculateSalary(String fileTime, String staffId, double wageMultiplier) {
+    public Duration showPrintTotalWorkTime(String fileTime, String staffId) {
+        Duration totalWorkTime = totalTime(fileTime, staffId);
+        System.out.println("Tổng thời gian làm việc của ID " + staffId + ": " + totalWorkTime.toHours() + "H, " + totalWorkTime.toMinutesPart() + " p");
+        return totalWorkTime;
+    }
+    public Duration printTotalWorkTime(String fileTime, String staffId) {
+        Duration totalWorkTime = totalTime(fileTime, staffId);
+        return totalWorkTime;
+    }
+
+
+    public Duration calculateTotalWorkTime(String fileTime, String staffId) {
         Duration totalWorkTime = Duration.ZERO;
         try (BufferedReader reader = new BufferedReader(new FileReader(fileTime))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                // Xử lý dữ liệu từ file
                 String[] tokens = line.split(",");
                 if (tokens.length >= 4) {
                     String id = tokens[0];
@@ -109,21 +108,14 @@ public class TimeService {
                         totalWorkTime = totalWorkTime.plus(workDuration);
                     }
                 }
-                // Tính thời gian làm việc và cộng dồn
             }
-            // Tính lương dựa trên tổng thời gian làm việc và hệ số lương
-            int salary = (int) (totalWorkTime.toHours() * wageMultiplier);
-
-            // In thông tin về lương
-            System.out.println("Lương của nhân viên có ID " + staffId + ": " + salary);
-
-            return salary;
         } catch (IOException e) {
             System.err.println("Lỗi khi đọc tệp tin.");
         }
 
-        return 0;
+        return totalWorkTime;
     }
+
 
 
     }

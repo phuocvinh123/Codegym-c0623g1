@@ -59,9 +59,5 @@ public class OvertimeService {
         return totalSalary;
     }
 
-    public static void main(String[] args) {
-        OvertimeService overtimeService=new OvertimeService();
-        overtimeService.calculateTotalSalary("./data/overtime.txt","10032");
-    }
 }
 

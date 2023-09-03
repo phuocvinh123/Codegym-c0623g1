@@ -3,17 +3,21 @@ package view;
 import service.AdminService;
 import service.IAminService;
 import service.TimeService;
+import service.TotalSalaryCalculator;
 
 import java.util.Scanner;
 
 public class StaffView {
     private IAminService iStaffService;
     private Scanner scanner = new Scanner(System.in);
+    private TimeView timeView = new TimeView();
+    private TotalSalaryCalculator totalSalary = new TotalSalaryCalculator();
 
     public StaffView() {
         iStaffService = new AdminService();
     }
-    public void launcher(){
+
+    public void launcher() {
         boolean checkAction = false;
         while (true) {
             System.out.println("                                                           ╔════════════════════════════════════════════╗");
@@ -22,13 +26,15 @@ public class StaffView {
             System.out.println("                                                           ║      2. Chấm công                          ║");
             System.out.println("                                                           ║      3. Hiển thị tổng số thời gian làm việc║");
             System.out.println("                                                           ║     trong 1 tháng                          ║");
-            System.out.println("                                                           ║      4. Tính lương                         ║");
-            System.out.println("                                                           ║      5.Hiển thị tổng giờ làm               ║");
+            System.out.println("                                                           ║      4. Tính lương giờ làm                 ║");
+            System.out.println("                                                           ║      5.Tính lương tăng ca                  ║");
+            System.out.println("                                                           ║      6. Tổng lương phải trả                ║");
+            System.out.println("                                                           ║      7. Mức Lương cơ bản                   ║");
             System.out.println("                                                           ║      0. Quay lại                           ║");
             System.out.println("                                                           ╚════════════════════════════════════════════╝");
             int actionMenu = Integer.parseInt(scanner.nextLine());
             switch (actionMenu) {
-                case 0->{
+                case 0 -> {
                     menu();
                 }
                 case 1 -> {
@@ -45,49 +51,63 @@ public class StaffView {
                     Payroll();
                 }
                 case 5 -> {
-                    showTiem();
+                    PayrollOvertime();
                 }
-//                case 6 -> {
-//                    sortStaff();
-//                }
-//                default -> {
-//                }
+                case 6 -> {
+                    totalSalaryPayable();
+                }
+                case 7 -> {
+                    basicSalary();
+                }
+                default -> {
+                    return;
+                }
             }
         }
     }
 
-    private void showTiem() {
-        TimeView timeView=new TimeView();
-        timeView.totalTime();
+    private void basicSalary() {
+        WageView wageView = new WageView();
+        int s = wageView.BasicWage();
+        System.out.println(s);
+    }
+
+    private void totalSalaryPayable() {
+        TotalSalaryCalculator t = new TotalSalaryCalculator();
+        System.out.print("Nhập id muốn hiển thị lương: ");
+        String id = scanner.nextLine();
+        t.readTotalById(id);
+    }
+
+    private void PayrollOvertime() {
+        timeView.toatalOverTime();
     }
 
     private void Payroll() {
-        WageView wageView=new WageView();
+        WageView wageView = new WageView();
         wageView.Wage();
     }
 
     private void hoursWorked() {
-        TimeView timeView = new TimeView();
         timeView.totalTime();
     }
 
     private void Timekeeping() {
-        TimeView timeView=new TimeView();
         timeView.launcher();
     }
 
     private void showStaff() {
-    AdminView adminView=new AdminView();
-    adminView.showStaff();
+        AdminView adminView = new AdminView();
+        adminView.showStaff();
     }
 
     private void menu() {
-        LoginView loginView=new LoginView();
+        LoginView loginView = new LoginView();
         loginView.menu();
     }
 
     public static void main(String[] args) {
-        StaffView staffView=new StaffView();
+        StaffView staffView = new StaffView();
         staffView.launcher();
     }
 }

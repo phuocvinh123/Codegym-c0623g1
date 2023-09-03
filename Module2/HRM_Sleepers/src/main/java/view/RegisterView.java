@@ -32,43 +32,44 @@ public class RegisterView implements IRegisterService {
         RegisterModel registerModel = new RegisterModel(username, password,role,birthday,phone,email);
        boolean exists=usernameExists(username);
        if(exists){
-           System.out.println("Tên người dùng đã tồn tại!");
+           System.err.println("Tên người dùng đã tồn tại!");
        }else {
            // Lưu thông tin người dùng vào cơ sở dữ liệu hoặc tệp tin
            saveUser(registerModel);
-
            System.out.println("Đăng ký thành công!");
        }
     }
 
-private String enterErole() {
-    boolean check = false;
-    String role = "USER";
-    String adminId = "151002";
+    private String enterErole() {
+        boolean check = false;
+        String role = "USER";
+        String adminId = "151002";
 
-    do {
-        try {
-            System.out.print("Enter role (ADMIN/USER): ");
-            String input = scanner.nextLine();
+        do {
+            try {
+                System.out.print("Enter role (ADMIN/USER): ");
+                String input = scanner.nextLine();
 
-            if (input.equalsIgnoreCase("ADMIN")) {
-                System.out.print("Enter ADMIN ID: ");
-                adminId = scanner.nextLine();
-                if (adminId.equals("151002")) {
-                    role = "ADMIN";
+                if (input.equalsIgnoreCase("ADMIN")) {
+                    System.out.print("Enter ADMIN ID: ");
+                    adminId = scanner.nextLine();
+                    if (adminId.equals("151002")) {
+                        role = "ADMIN";
+                        check = true;
+                    } else {
+                        System.err.println("Incorrect ADMIN ID. Please try again or enter as USER.");
+                    }
+                } else {
+                    role = "USER";
                     check = true;
                 }
-            } else {
-                role = "USER";
-                check = true;
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    } while (!check);
+        } while (!check);
 
-    return role;
-}
+        return role;
+    }
 
 
 
@@ -107,7 +108,7 @@ private String enterErole() {
     public LocalDate enterBirtDay(){
         LocalDate dob = null;
         try{
-            System.err.println("Nhập ngày sinh: (dd-MM-yyyy)");
+            System.out.println("Nhập ngày sinh: (dd-MM-yyyy)");
             dob = DateUtils.parseDate(scanner.nextLine());
         } catch (Exception exception) {
             exception.printStackTrace();

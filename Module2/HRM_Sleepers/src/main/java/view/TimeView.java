@@ -108,11 +108,14 @@ public class TimeView {
             staffView.launcher();
         }
     }
-
+//Tổng số giờ làm việc
     public void totalTime() {
         String staffId = enterStaffId(); // Yêu cầu người dùng nhập ID nhân viên
-        timeService.totalTime("./data/timekeeping.txt", staffId);
+        timeService.showPrintTotalWorkTime("./data/timekeeping.txt", staffId);
     }
+
+
+    //tính tổng tiền tăng ca
     public void toatalOverTime(){
         String staffId = enterStaffId();
         OvertimeService overtimeService=new OvertimeService();
@@ -126,7 +129,7 @@ public class TimeView {
 
     public static void main(String[] args) {
         TimeView timeView =new TimeView();
-        timeView.checkOut();
+        timeView.totalTime();
     }
 
 }

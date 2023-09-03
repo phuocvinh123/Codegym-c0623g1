@@ -1,9 +1,7 @@
 package view;
 
 import model.AdminModel;
-import service.GetValue;
-import service.IAminService;
-import service.AdminService;
+import service.*;
 import utils.DateUtils;
 
 import java.time.LocalDate;
@@ -14,6 +12,7 @@ import java.util.Scanner;
 
 public class AdminView {
     private IAminService iStaffService;
+    private WageView wageView=new WageView();
     private Scanner scanner = new Scanner(System.in);
 
     public AdminView() {
@@ -68,12 +67,14 @@ public class AdminView {
     }
 
     private void showWage() {
-        WageView wageView=new WageView();
-        wageView.showWage();
+        TotalSalaryCalculator t = new TotalSalaryCalculator();
+        wageView.calculateTotalWage();
+        t.totalSalary();
+        t.readTotal();
     }
 
     private void searchStaffs() {
-        System.out.println("Nhập tên muốn tìm kiếm:");
+        System.out.print("Nhập tên muốn tìm kiếm: ");
         String name = scanner.nextLine();
         List<AdminModel> staff = iStaffService.searchStaff(name);
         showStaffByName(staff);
@@ -184,14 +185,14 @@ public class AdminView {
     }
 
     private void deleteStaff() {
-        System.out.println("Nhập ID cần xóa: ");
+        System.out.print("Nhập ID cần xóa: ");
         long id = Long.parseLong(scanner.nextLine());
         iStaffService.deleteStaff(id);
         showStaff();
     }
 
     private void editStaff() {
-        System.out.println("Nhập ID cần sửa");
+        System.out.print("Nhập ID cần sửa");
         long id = Long.parseLong(scanner.nextLine());
         iStaffService.updateStaff(id, new AdminModel());
         showStaff();
@@ -243,5 +244,9 @@ public class AdminView {
         System.out.println("=============================================================================================================================================================================================================================\n\n");
     }
 
+    public static void main(String[] args) {
+        AdminView a=new AdminView();
+        a.launcher();
+    }
 
 }

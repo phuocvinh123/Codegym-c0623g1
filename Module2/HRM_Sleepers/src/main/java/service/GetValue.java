@@ -149,7 +149,7 @@ public class GetValue extends AdminModel {
                 }
                 check = true;
             } catch (IllegalArgumentException e) {
-                System.out.println("Error: " + e.getMessage());
+                System.err.println("Error: " + e.getMessage());
             } catch (Exception e) {
                 System.err.println("Invalid input. Please enter a valid age.");
                 scanner.nextLine(); // Clear the input buffer

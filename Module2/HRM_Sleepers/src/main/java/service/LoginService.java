@@ -12,7 +12,6 @@ import java.util.Scanner;
 
 public class LoginService implements ILoginService {
     private final String fileLogin = "./data/login.txt";
-    private final String fileStaff="./data/staff.txt";
     Scanner scanner = new Scanner(System.in);
 
     @Override
@@ -76,7 +75,7 @@ public class LoginService implements ILoginService {
                         staffView.launcher();
                     } else if (getUserRole(username) == ERole.ADMIN) {
                         // Chuyển hướng đến trang quản trị viên
-                        System.out.println("Chào mừng admin xinh đẹp");
+                        System.out.println("Chào mừng admin chúc bạn một ngày tốt lành");
                         AdminView staffView=new AdminView();
                         staffView.launcher();
                     }
@@ -94,7 +93,8 @@ public class LoginService implements ILoginService {
         List<LoginModel> login = getAllLogin();
 
         for (LoginModel loginItem : login) {
-            if (loginItem.getUserName().equals(username) && loginItem.getPassword().equals(password)) {
+            boolean isLoginValid = loginItem.getUserName().equals(username) && loginItem.getPassword().equals(password);
+            if (isLoginValid) {
                 if (loginItem.getRole() == ERole.USER) {
                     // Kiểm tra vai trò người dùng
                     // Nếu là người dùng, thực hiện các hành động tương ứng

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import utils.AppConstant;
 import utils.DateUtils;
 
 import java.time.LocalDate;
@@ -23,7 +24,7 @@ public class RegisterModel implements IParseModel<RegisterModel> {
 
     @Override
     public RegisterModel parse(String line) {
-        String[] items = line.split(",");
+        String[] items = line.split(AppConstant.SPLIT_ITEM_FILE);
        RegisterModel r=new RegisterModel(items[0],items[1], ERole.valueOf(items[2]), DateUtils.parseDate(items[3]),items[4],items[5]);
        return r;
     }

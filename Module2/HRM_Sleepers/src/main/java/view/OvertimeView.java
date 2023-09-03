@@ -19,6 +19,7 @@ public class OvertimeView {
         overtimeByDay = new HashMap<>();
         overtimeIdByDay = new HashMap<>();
     }
+    //Đăng kí tăng ca
     public void overtime(String staffId) {
         double overtimeWage;
         LocalDate date = LocalDate.now(); // Lấy ngày hiện tại
@@ -55,8 +56,4 @@ public class OvertimeView {
     }
 
 
-    public static void main(String[] args) {
-        OvertimeView overtimeView=new OvertimeView();
-        overtimeView.overtime("10032");
-    }
 }

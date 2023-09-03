@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import utils.AppConstant;
 
 @Getter
 @Setter
@@ -17,7 +18,7 @@ public class OverTimeModel implements IParseModel<OverTimeModel> {
 
     @Override
     public OverTimeModel parse(String line) {
-        String[] items = line.split(",");
+        String[] items = line.split(AppConstant.SPLIT_ITEM_FILE);
         OverTimeModel time=new  OverTimeModel(Long.parseLong(items[0]),Integer.parseInt(items[1]),Double.parseDouble(items[2]));
         return time;
     }
