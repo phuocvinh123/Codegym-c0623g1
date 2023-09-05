@@ -23,7 +23,7 @@ public class TimeView {
     private String currentStaffId;
     private static String checkedInStaffId = "";
     TimeService timeService = new TimeService();
-    OvertimeView overtimeView=new OvertimeView();
+    OvertimeView overtimeView = new OvertimeView();
 
     public void launcher() {
         boolean checkAction = false;
@@ -43,17 +43,18 @@ public class TimeView {
                     checkIn();
                 }
                 default -> {
-                    continue;
+                    return;
                 }
             }
         }
     }
 
     private void menu() {
+        StaffView staffView = new StaffView();
+        staffView.launcher();
     }
 
     public void checkOut1() {
-        boolean checkAction = false;
         while (true) {
             System.out.println("                                                           ╔════════════════════════════════════════════╗");
             System.out.println("                                                           ║    Bạn đã nỗ lực hết mình trong công việc, ║");
@@ -70,7 +71,7 @@ public class TimeView {
                     checkOut();
                 }
                 default -> {
-                    continue;
+                    return;
                 }
             }
         }
@@ -81,10 +82,10 @@ public class TimeView {
         AdminView adminView = new AdminView();
         adminView.showStaff();
         System.out.println("Check In - Nhập thông tin:");
-        String staffId = "";
-        System.out.print("Mã nhân viên: ");
-        staffId = scanner.nextLine();
-        checkedInStaffId = timeService.checkIntTime(staffId);
+        String staffId = enterStaffId();
+        String code = enterCode();
+        TimeService timeService = new TimeService(); // Khởi tạo đối tượng TimeService
+        checkedInStaffId = timeService.checkIntTime(staffId, code);
         checkOut1();
     }
 
@@ -108,7 +109,8 @@ public class TimeView {
             staffView.launcher();
         }
     }
-//Tổng số giờ làm việc
+
+    //Tổng số giờ làm việc
     public void totalTime() {
         String staffId = enterStaffId(); // Yêu cầu người dùng nhập ID nhân viên
         timeService.showPrintTotalWorkTime("./data/timekeeping.txt", staffId);
@@ -116,10 +118,10 @@ public class TimeView {
 
 
     //tính tổng tiền tăng ca
-    public void toatalOverTime(){
+    public void toatalOverTime() {
         String staffId = enterStaffId();
-        OvertimeService overtimeService=new OvertimeService();
-        overtimeService.calculateTotalSalary("./data/overtime.txt",staffId);
+        OvertimeService overtimeService = new OvertimeService();
+        overtimeService.calculateTotalSalary("./data/overtime.txt", staffId);
     }
 
     public String enterStaffId() {
@@ -127,9 +129,14 @@ public class TimeView {
         return scanner.nextLine();
     }
 
+    public String enterCode() {
+        System.out.print("Nhập mã xác thực: ");
+        return scanner.nextLine();
+    }
+
     public static void main(String[] args) {
-        TimeView timeView =new TimeView();
-        timeView.totalTime();
+        TimeView timeView = new TimeView();
+        timeView.checkIn();
     }
 
 }

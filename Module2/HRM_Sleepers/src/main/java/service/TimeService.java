@@ -16,14 +16,12 @@ public class TimeService {
 
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy,HH:mm:ss");
     private static String checkedInStaffId = "";
-    public String checkIntTime(String staffId ){
-        boolean foundStaffId = false;
+    public String checkIntTime(String staffId, String code) {
         LocalDateTime currentTime = LocalDateTime.now();
         String formattedTime = currentTime.format(formatter);
         List<AdminModel> adminList = readData(fileStaff, AdminModel.class);
         for (AdminModel admin : adminList) {
-            if (String.valueOf(admin.getId()).equals(staffId)) {
-                foundStaffId = true;
+            if (String.valueOf(admin.getId()).equals(staffId) && admin.getCode().equals(code)) {
                 try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileTime, true))) {
                     writer.write(staffId + "," + formattedTime + ",");
                 } catch (IOException e) {
@@ -31,18 +29,14 @@ public class TimeService {
                 }
                 System.out.println("Check In thành công!");
                 checkedInStaffId = staffId; // Lưu trữ mã nhân viên đã Check In thành công
-                break;
+                return checkedInStaffId;
             }
         }
-        if (!foundStaffId) {
-            System.err.println("Mã nhân viên không tồn tại. Vui lòng nhập lại.");
-        }
-        return  checkedInStaffId;
+        System.err.println("Mã nhân viên hoặc mã xác thực không đúng. Vui lòng nhập lại.");
+        return null;
     }
     public void checkOutTime(String checkOutTime ){
         if (!checkOutTime.isEmpty()) {
-            boolean validCheckOutTime = false;
-            validCheckOutTime = true;
             try {
                 FileWriter fileWriter = new FileWriter(fileTime, true);
                 fileWriter.write(  checkOutTime + "\n");
@@ -81,7 +75,7 @@ public class TimeService {
     }
     public Duration showPrintTotalWorkTime(String fileTime, String staffId) {
         Duration totalWorkTime = totalTime(fileTime, staffId);
-        System.out.println("Tổng thời gian làm việc của ID " + staffId + ": " + totalWorkTime.toHours() + "H, " + totalWorkTime.toMinutesPart() + " p");
+        System.out.println("Tổng thời gian làm việc của ID " + staffId + ": " + totalWorkTime.toHours() + ":" + totalWorkTime.toMinutesPart());
         return totalWorkTime;
     }
     public Duration printTotalWorkTime(String fileTime, String staffId) {

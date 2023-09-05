@@ -66,7 +66,7 @@ public class GetValue extends AdminModel {
         String strType = "";
         if (position != null) {
             switch (position) {
-                case "0" -> strType = "Staff Serve";
+                case "0" -> strType = "StaffServe";
                 case "1" -> strType = "ServingFood";
                 case "2" -> strType = "receptionist";
                 case "3" -> strType = "RegionalChief";
@@ -168,6 +168,10 @@ public class GetValue extends AdminModel {
        }
         return dob;
     }
-
+    public static String getCode(String code){
+        System.out.println("Enter to code:");
+       code=scanner.nextLine();
+        return code;
+    }
 
 }

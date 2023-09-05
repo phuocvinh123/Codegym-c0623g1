@@ -23,13 +23,13 @@ public class TimeModel implements IParseModel<TimeModel> {
     @Override
     public TimeModel parse(String line) {
         String[] items = line.split(AppConstant.SPLIT_ITEM_FILE);
-        TimeModel time=new TimeModel(Long.parseLong(items[0]),items[1],items[2],items[3]);
+        TimeModel time = new TimeModel(Long.parseLong(items[0]), items[1], items[2], items[3]);
         return time;
     }
 
     @Override
     public String toString() {
-        return String.format("%s,%s,%s,%s",this.id,this.date,this.startTime,this.endTime);
+        return String.format("%s,%s,%s,%s", this.id, this.date, this.startTime, this.endTime);
     }
 
 

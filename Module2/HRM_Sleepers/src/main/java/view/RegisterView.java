@@ -23,23 +23,19 @@ public class RegisterView implements IRegisterService {
         System.out.println("Đăng ký mới người dùng:");
         String username = enterUsername();
         String password = enterPassword();
-        ERole role= ERole.valueOf(enterErole());
-        LocalDate birthday=enterBirtDay();
-        String phone=enterPhone();
-        String email=enterEmail();
+        ERole role = ERole.valueOf(enterErole());
 
         // Tạo người dùng mới
-        RegisterModel registerModel = new RegisterModel(username, password,role,birthday,phone,email);
-       boolean exists=usernameExists(username);
-       if(exists){
-           System.err.println("Tên người dùng đã tồn tại!");
-       }else {
-           // Lưu thông tin người dùng vào cơ sở dữ liệu hoặc tệp tin
-           saveUser(registerModel);
-           System.out.println("Đăng ký thành công!");
-       }
+        RegisterModel registerModel = new RegisterModel(username, password, role);
+        boolean exists = usernameExists(username);
+        if (exists) {
+            System.err.println("Tên người dùng đã tồn tại!");
+        } else {
+            // Lưu thông tin người dùng vào cơ sở dữ liệu hoặc tệp tin
+            saveUser(registerModel);
+            System.out.println("Đăng ký thành công!");
+        }
     }
-
     private String enterErole() {
         boolean check = false;
         String role = "USER";
@@ -71,8 +67,6 @@ public class RegisterView implements IRegisterService {
         return role;
     }
 
-
-
     private String enterUsername() {
         boolean check = false;
         String username;
@@ -90,46 +84,7 @@ public class RegisterView implements IRegisterService {
         } while (!check);
         return username;
     }
-    public String enterEmail(){
-        boolean check = false;
-        String email;
-        do{ System.out.println("Enter to email:");
-            email=scanner.nextLine();
-            try {
-                if(!email.matches("^[A-Za-z0-9+-._]+@gmail.com+$")){
-                    throw new IllegalArgumentException("Invalid email");
-                }check=true;
-            }catch (IllegalArgumentException e){
-                System.err.println("Lỗi: "+e.getMessage());
-            }
-        }while (!check);
-        return email;
-    }
-    public LocalDate enterBirtDay(){
-        LocalDate dob = null;
-        try{
-            System.out.println("Nhập ngày sinh: (dd-MM-yyyy)");
-            dob = DateUtils.parseDate(scanner.nextLine());
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
-        return dob;
-    }
-    public String enterPhone(){
-        boolean check = false;
-        String phone;
-        do{ System.out.println("Enter to phone number:");
-            phone=scanner.nextLine();
-            try {
-                if(!phone.matches("(09|03|05|07|08|02)\\d{8}")&&phone.length()!=10){
-                    throw new IllegalArgumentException("phone number must start tape 02,03,05,07,08,09 and enough 10 numbers");
-                }check=true;
-            }catch (IllegalArgumentException e){
-                System.err.println("Lỗi: "+e.getMessage());
-            }
-        }while (!check);
-        return phone;
-    }
+
     private String enterPassword() {
         boolean check = false;
         String password;
@@ -158,6 +113,7 @@ public class RegisterView implements IRegisterService {
         return false;
     }
 
+    //Lưu thông tin vào file
     private void saveUser(RegisterModel registerModel) {
         List<RegisterModel> registerList = getAllRegister();
         registerList.add(registerModel);

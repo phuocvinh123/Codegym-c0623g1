@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class AdminView {
     private IAminService iStaffService;
-    private WageView wageView=new WageView();
+    private WageView wageView = new WageView();
     private Scanner scanner = new Scanner(System.in);
 
     public AdminView() {
@@ -20,7 +20,6 @@ public class AdminView {
     }
 
     public void launcher() {
-        boolean checkAction = false;
         while (true) {
             System.out.println("                                                           ╔════════════════════════════════════════════╗");
             System.out.println("                                                           ║       Trang quản lí nhân viên              ║");
@@ -28,14 +27,14 @@ public class AdminView {
             System.out.println("                                                           ║      2. Xóa nhân viên                      ║");
             System.out.println("                                                           ║      3. Thay đổi thông tin nhân viên       ║");
             System.out.println("                                                           ║      4. Hiển thị danh sách nhân viên       ║");
-            System.out.println("                                                           ║      5. Tìm kiếm nhân viên theo tên        ║");
+            System.out.println("                                                           ║      5. Tìm kiếm nhân viên theo id         ║");
             System.out.println("                                                           ║      6. Xắp xếp nhân viên                  ║");
             System.out.println("                                                           ║      7. Hiển thị lương của tất cả nhân viên║");
             System.out.println("                                                           ║      0. Quay lại                           ║");
             System.out.println("                                                           ╚════════════════════════════════════════════╝");
             int actionMenu = Integer.parseInt(scanner.nextLine());
             switch (actionMenu) {
-                case 0->{
+                case 0 -> {
                     menu();
                 }
                 case 1 -> {
@@ -51,12 +50,12 @@ public class AdminView {
                     showStaff();
                 }
                 case 5 -> {
-                    showStaff();
                     searchStaffs();
                 }
                 case 6 -> {
                     sortStaff();
-                }case 7 -> {
+                }
+                case 7 -> {
                     showWage();
                 }
                 default -> {
@@ -74,16 +73,18 @@ public class AdminView {
     }
 
     private void searchStaffs() {
-        System.out.print("Nhập tên muốn tìm kiếm: ");
-        String name = scanner.nextLine();
-        List<AdminModel> staff = iStaffService.searchStaff(name);
+        System.out.print("Nhập id muốn tìm kiếm: ");
+        long id = scanner.nextLong();
+        scanner.nextLine(); // Đọc bỏ ký tự new line sau khi đọc số nguyên
+        List<AdminModel> staff = iStaffService.searchStaff(id);
         showStaffByName(staff);
-
     }
-    private void menu(){
-        LoginView loginView=new LoginView();
+
+    private void menu() {
+        LoginView loginView = new LoginView();
         loginView.menu();
     }
+
     private void sortStaff() {
         System.out.println("                                                           ╔════════════════════════════════════════════╗");
         System.out.println("                                                           ║      Bạn muốn sắp xếp theo kiểu nào        ║");
@@ -107,6 +108,7 @@ public class AdminView {
         }
         showStaff(staffs);
     }
+
     private Comparator<AdminModel> sortUserDecreasing(Comparator<AdminModel> comparator) {
         System.out.println("                                                           ╔════════════════════════════════════════════╗");
         System.out.println("                                                           ║            Bạn muốn sắp xếp theo:          ║");
@@ -192,7 +194,8 @@ public class AdminView {
     }
 
     private void editStaff() {
-        System.out.print("Nhập ID cần sửa");
+        showStaff();
+        System.out.print("Nhập ID cần sửa: ");
         long id = Long.parseLong(scanner.nextLine());
         iStaffService.updateStaff(id, new AdminModel());
         showStaff();
@@ -208,7 +211,8 @@ public class AdminView {
         String phone = GetValue.getPhone("");
         String address = GetValue.getAddress("");
         String email = GetValue.getEmail("");
-        AdminModel staff = new AdminModel(System.currentTimeMillis() % 100000, pos, name, age, gender, bir, cccd, phone, address, email);
+        String code = GetValue.getCode("");
+        AdminModel staff = new AdminModel(System.currentTimeMillis() % 100000, pos, name, age, gender, bir, cccd, phone, address, email, code);
         iStaffService.createStaff(staff);
         showStaff();
     }
@@ -245,7 +249,7 @@ public class AdminView {
     }
 
     public static void main(String[] args) {
-        AdminView a=new AdminView();
+        AdminView a = new AdminView();
         a.launcher();
     }
 

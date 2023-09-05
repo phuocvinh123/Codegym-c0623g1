@@ -1,5 +1,5 @@
 package model;
 
-public interface IParseModel <T>{
+public interface IParseModel<T> {
     T parse(String line);
 }

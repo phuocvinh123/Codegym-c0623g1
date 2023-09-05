@@ -11,7 +11,7 @@ public class TotalSalaryCalculator {
     private final String fileOvertime = "./data/overtime.txt";
     private final String fileTotal = "./data/total.txt";
 
-//Đọc dữ liệu từ file overtime và tính tổng thời gian làm việc
+    //Đọc dữ liệu từ file overtime và tính tổng thời gian làm việc
     public double readOvertimeSalary(String filename, String staffId) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(fileOvertime));
         String line;
@@ -75,7 +75,6 @@ public class TotalSalaryCalculator {
     }
 
 
-
     //Tính lương tăng ca và lương làm việc lưu vào file total
     public void totalSalary() {
         try {
@@ -103,7 +102,7 @@ public class TotalSalaryCalculator {
 
     private List<String> getStaffIds() throws IOException {
         List<String> staffIds = new ArrayList<>();
-        File Overtime = new File(fileOvertime );
+        File Overtime = new File(fileOvertime);
         File Wage = new File(fileWage);
 
         if (Overtime.exists() && Wage.exists()) {

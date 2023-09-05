@@ -13,12 +13,13 @@ public class OvertimeView {
     private Scanner scanner = new Scanner(System.in);
     private Map<LocalDate, Double> overtimeByDay;
     private Map<LocalDate, String> overtimeIdByDay;
-    private OvertimeService overtimeService=new OvertimeService();
+    private OvertimeService overtimeService = new OvertimeService();
 
     public OvertimeView() {
         overtimeByDay = new HashMap<>();
         overtimeIdByDay = new HashMap<>();
     }
+
     //Đăng kí tăng ca
     public void overtime(String staffId) {
         double overtimeWage;
@@ -52,7 +53,7 @@ public class OvertimeView {
         overtimeByDay.put(currentDate, currentOvertime);
         overtimeIdByDay.put(currentDate, staffId);
         System.out.println("Tổng tăng ca ngày " + currentDate + ": " + currentOvertime);
-        overtimeService.saveOvertimeToFile(overtimeByDay,overtimeIdByDay);
+        overtimeService.saveOvertimeToFile(overtimeByDay, overtimeIdByDay);
     }
 
 

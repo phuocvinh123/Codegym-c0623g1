@@ -36,6 +36,7 @@ public class WageService {
         }
         return jobTitle;
     }
+
     public void saveWageToFile(String staffId, double workHours, double wage, String date) {
         try {
             List<String> lines = Files.readAllLines(Paths.get(fileWage));
@@ -60,7 +61,8 @@ public class WageService {
             System.err.println("Lỗi khi ghi dữ liệu lương vào tệp tin.");
         }
     }
-//dùng để lấy danh sách tất cả các ID của nhân viên trong filetime
+
+    //dùng để lấy danh sách tất cả các ID của nhân viên trong filetime
     public List<String> getAllStaffIds() {
         List<String> staffIds = new ArrayList<>();
 

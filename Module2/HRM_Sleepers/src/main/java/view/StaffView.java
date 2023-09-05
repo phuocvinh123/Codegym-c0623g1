@@ -11,14 +11,12 @@ public class StaffView {
     private IAminService iStaffService;
     private Scanner scanner = new Scanner(System.in);
     private TimeView timeView = new TimeView();
-    private TotalSalaryCalculator totalSalary = new TotalSalaryCalculator();
 
     public StaffView() {
         iStaffService = new AdminService();
     }
 
     public void launcher() {
-        boolean checkAction = false;
         while (true) {
             System.out.println("                                                           ╔════════════════════════════════════════════╗");
             System.out.println("                                                           ║       Trang thông tin nhân viên            ║");
@@ -41,7 +39,6 @@ public class StaffView {
                     showStaff();
                 }
                 case 2 -> {
-                    showStaff();
                     Timekeeping();
                 }
                 case 3 -> {

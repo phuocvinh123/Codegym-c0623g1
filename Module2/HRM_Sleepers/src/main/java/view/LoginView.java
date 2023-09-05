@@ -8,10 +8,13 @@ import java.util.Scanner;
 public class LoginView {
     private ILoginService iLoginService;
     private Scanner scanner = new Scanner(System.in);
-    public LoginView(){iLoginService=new LoginService();}
-   public void menu(){
-        boolean check=false;
-        while(true){
+
+    public LoginView() {
+        iLoginService = new LoginService();
+    }
+
+    public void menu() {
+        while (true) {
             System.out.println("                                           ╔═══════════════════════════════════════════════════════════╗");
             System.out.println("                                           ║        Welcome to employee management software            ║");
             System.out.println("                                           ╠═══════════════════════════════════════════════════════════╣");
@@ -21,21 +24,24 @@ public class LoginView {
             System.out.println("                                           ║              0. Exit(Thoát chương trình)                  ║");
             System.out.println("                                           ║                                                           ║");
             System.out.println("                                           ╚═══════════════════════════════════════════════════════════╝");
-            int number=Integer.parseInt(scanner.nextLine());
-            switch (number){
-                case 1->menuLogin();
-                case 2->menuRegister();
-                default -> {}
+            int number = Integer.parseInt(scanner.nextLine());
+            switch (number) {
+                case 1 -> menuLogin();
+                case 2 -> menuRegister();
+                default -> {
+                    return;
+                }
             }
         }
     }
 
-    public void menuLogin(){
-        LoginService loginService=new LoginService();
+    public void menuLogin() {
+        LoginService loginService = new LoginService();
         loginService.login();
     }
-    public void menuRegister(){
-        RegisterView registerService=new RegisterView();
+
+    public void menuRegister() {
+        RegisterView registerService = new RegisterView();
         registerService.register();
     }
 

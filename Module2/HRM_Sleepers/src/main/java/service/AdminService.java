@@ -9,7 +9,8 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class AdminService implements IAminService {
-    private final String fileStaff="./data/staff.txt";
+    private final String fileStaff = "./data/staff.txt";
+
     @Override
     public List<AdminModel> getAllStaff() {
         return FileUtils.readData(fileStaff, AdminModel.class);
@@ -17,9 +18,9 @@ public class AdminService implements IAminService {
 
     @Override
     public AdminModel findStaffById(long id) {
-    List<AdminModel>staff=getAllStaff();
-    AdminModel s=staff.stream().filter(staff1 -> staff1.getId()==id).findFirst().orElseThrow();
-    return s;
+        List<AdminModel> staff = getAllStaff();
+        AdminModel s = staff.stream().filter(staff1 -> staff1.getId() == id).findFirst().orElseThrow();
+        return s;
     }
 
     @Override
@@ -31,52 +32,23 @@ public class AdminService implements IAminService {
                 .orElse(null);
         if (staffUpDate != null) {
             System.out.println("Nhập thông tin mới: ");
-            String pos = GetValue.getPosition("");
-            String name = GetValue.getFullName("");
-            int age = GetValue.getAge("");
-            String gender = GetValue.getGender("");
-            LocalDate bir = GetValue.getBirtDay("");
-            String cccd = GetValue.getCccd("");
-            String phone = GetValue.getPhone("");
-            String address = GetValue.getAddress("");
-            String email = GetValue.getEmail("");
-
-            if (!pos.isEmpty()) {
-                staffUpDate.setPosition(pos);
-            }
-            if (!name.isEmpty()) {
-                staffUpDate.setFullName(name);
-            }
-            if (age != 0) {
-                staffUpDate.setAge(age);
-            }
-            if (!gender.isEmpty()) {
-                staffUpDate.setGender(gender);
-            }
-            if (bir != null) {
-                staffUpDate.setBirthday(bir);
-            }
-            if (!cccd.isEmpty()) {
-                staffUpDate.setCccd(cccd);
-            }
-            if (!phone.isEmpty()) {
-                staffUpDate.setPhone(phone);
-            }
-            if (!address.isEmpty()) {
-                staffUpDate.setAddress(address);
-            }
-            if (!email.isEmpty()) {
-                staffUpDate.setEmail(email);
-            }
+            String pos = EditInformation.updatePosition(staffUpDate);
+            String name = EditInformation.updateFullName(staffUpDate);
+            String age = EditInformation.updateAge(staffUpDate);
+            String gender = EditInformation.updateGender(staffUpDate);
+            String bir = EditInformation.updateBirthday(staffUpDate);
+            String cccd = EditInformation.updateCCCD(staffUpDate);
+            String phone = EditInformation.updatePhone(staffUpDate);
+            String address = EditInformation.updateAddress(staffUpDate);
+            String email = EditInformation.updateEmail(staffUpDate);
+            String code = EditInformation.updateCode(staffUpDate);
             // Cập nhật danh sách nhân viên
             FileUtils.writeData(fileStaff, staffs);
-            System.out.println("Đã cập nhật thông tin nhân viên!");
         } else {
-            System.out.println("Không tìm thấy nhân viên với ID đã nhập.");
+            System.err.println("Không tìm thấy nhân viên với ID đã nhập.");
         }
 
     }
-
 
 
     @Override
@@ -95,9 +67,9 @@ public class AdminService implements IAminService {
     }
 
     @Override
-    public List<AdminModel> searchStaff(String name) {
+    public List<AdminModel> searchStaff(Long id) {
         List<AdminModel> staffs = getAllStaff();
-        staffs = staffs.stream().filter(o -> o.getFullName().contains(name)).collect(Collectors.toList());
+        staffs = staffs.stream().filter(o -> o.getId() == id).collect(Collectors.toList());
         return staffs;
     }
 

@@ -20,7 +20,6 @@ public class LoginService implements ILoginService {
     }
 
 
-
     private String userName() {
         boolean check = false;
         String username;
@@ -71,12 +70,12 @@ public class LoginService implements ILoginService {
                     if (getUserRole(username) == ERole.USER) {
                         // Chuyển hướng đến trang người dùng
                         System.out.println("Chúc bạn có một ngày làm việc hiệu quả");
-                        StaffView staffView=new StaffView();
+                        StaffView staffView = new StaffView();
                         staffView.launcher();
                     } else if (getUserRole(username) == ERole.ADMIN) {
                         // Chuyển hướng đến trang quản trị viên
                         System.out.println("Chào mừng admin chúc bạn một ngày tốt lành");
-                        AdminView staffView=new AdminView();
+                        AdminView staffView = new AdminView();
                         staffView.launcher();
                     }
                     check = true;
@@ -109,6 +108,7 @@ public class LoginService implements ILoginService {
 
         return false;
     }
+
     private ERole getUserRole(String username) {
         List<LoginModel> loginList = getAllLogin();
         for (LoginModel login : loginList) {

@@ -21,7 +21,7 @@ import static utils.DateUtils.parseDate;
 
 
 public class WageView {
-    private  TimeService timeService=new TimeService();
+    private TimeService timeService = new TimeService();
     private WageService wageService = new WageService();
     private Scanner scanner = new Scanner(System.in);
     private final String fileTime = "./data/timekeeping.txt";
@@ -37,7 +37,8 @@ public class WageView {
         wageMap.put("RegionalChief", 25000);
         wageMap.put("Manager", 35000);
     }
-//Dùng để lấy lương cơ bản theo từng vị trí
+
+    //Dùng để lấy lương cơ bản theo từng vị trí
     public int getBasicWageFromFile() {
         String staffId = enterStaffId();
         String jobTitle = wageService.getJobTitleFromStaffFile(staffId);
@@ -58,27 +59,30 @@ public class WageView {
         System.out.print("Nhập ID nhân viên: ");
         return scanner.nextLine();
     }
-//lương cơ bản từng chức vụ
+
+    //lương cơ bản từng chức vụ
     public int BasicWage() {
         int basiWage = getBasicWageFromFile();
         return basiWage;
     }
-//Tính tổng thời gian làm việc và lương
+
+    //Tính tổng thời gian làm việc và lương
     public double Wage() {
         String staffId = enterStaffId();
         String jobTitle = wageService.getJobTitleFromStaffFile(staffId);
         int basicWage = getWageByJobTitle(jobTitle);
-        TimeService timeService=new TimeService();
-        double wage =calculateSalaryById(fileTime, staffId, basicWage);
+        TimeService timeService = new TimeService();
+        double wage = calculateSalaryById(fileTime, staffId, basicWage);
 
         // Lưu thông tin lương vào file wage.txt
-        LocalDate date =LocalDate.now() ;
-        wageService.saveWageToFile(staffId, timeService.showPrintTotalWorkTime(fileTime, staffId).toHours(), wage,DateUtils.formatDate(date));
+        LocalDate date = LocalDate.now();
+        wageService.saveWageToFile(staffId, timeService.showPrintTotalWorkTime(fileTime, staffId).toHours(), wage, DateUtils.formatDate(date));
 
         return wage;
     }
+
     public int calculateSalaryById(String fileTime, String staffId, double wageMultiplier) {
-        Duration totalWorkTime =timeService.calculateTotalWorkTime(fileTime, staffId);
+        Duration totalWorkTime = timeService.calculateTotalWorkTime(fileTime, staffId);
         int salary = (int) (totalWorkTime.toHours() * wageMultiplier);
 
         System.out.println("Lương của nhân viên có ID " + staffId + ": " + salary);
@@ -94,29 +98,28 @@ public class WageView {
         for (String staffId : staffIds) {
             String jobTitle = wageService.getJobTitleFromStaffFile(staffId);
             int basicWage = getWageByJobTitle(jobTitle);
-            TimeService timeService=new TimeService();
-            double wage =calculateSalary(fileTime, staffId, basicWage);
+            TimeService timeService = new TimeService();
+            double wage = calculateSalary(fileTime, staffId, basicWage);
             totalWage += wage;
 
             // Lưu thông tin lương vào file wage.txt
             LocalDate date = LocalDate.now();
-            wageService.saveWageToFile(staffId,timeService.printTotalWorkTime(fileTime, staffId).toHours(), wage, DateUtils.formatDate(date));
+            wageService.saveWageToFile(staffId, timeService.printTotalWorkTime(fileTime, staffId).toHours(), wage, DateUtils.formatDate(date));
         }
 
         return totalWage;
     }
+
     public int calculateSalary(String fileTime, String staffId, double wageMultiplier) {
-        Duration totalWorkTime =timeService.calculateTotalWorkTime(fileTime, staffId);
+        Duration totalWorkTime = timeService.calculateTotalWorkTime(fileTime, staffId);
         int salary = (int) (totalWorkTime.toHours() * wageMultiplier);
         return salary;
     }
 
 
-
-
     public static void main(String[] args) {
         WageView wageView = new WageView();
-wageView.calculateTotalWage();
+        wageView.calculateTotalWage();
     }
 
 }

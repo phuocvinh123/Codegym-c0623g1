@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileUtils {
-    public static <T> List<T> readData(String fileName, Class<T> clazz){
+    public static <T> List<T> readData(String fileName, Class<T> clazz) {
         List<T> data = new ArrayList<>();
         FileReader fileReader = null;
         BufferedReader bufferedReader = null;
@@ -29,7 +29,7 @@ public class FileUtils {
             throw new RuntimeException(e);
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
-        }finally {
+        } finally {
             try {
                 fileReader.close();
                 bufferedReader.close();
@@ -40,7 +40,8 @@ public class FileUtils {
 
         return data;
     }
-    public static <T> void writeData(String fileName, List<T> data){
+
+    public static <T> void writeData(String fileName, List<T> data) {
         FileWriter fileWriter = null;
         try {
             File file = new File(fileName);
@@ -54,7 +55,7 @@ public class FileUtils {
             }
         } catch (IOException ioException) {
             ioException.printStackTrace();
-        }finally {
+        } finally {
             try {
                 fileWriter.close();
             } catch (IOException e) {
@@ -64,5 +65,5 @@ public class FileUtils {
 
 
     }
-    }
+}
 
