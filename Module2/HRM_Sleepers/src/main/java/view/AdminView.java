@@ -72,7 +72,7 @@ public class AdminView {
         t.readTotal();
     }
 
-    private void searchStaffs() {
+    public void searchStaffs() {
         System.out.print("Nhập id muốn tìm kiếm: ");
         long id = scanner.nextLong();
         scanner.nextLine(); // Đọc bỏ ký tự new line sau khi đọc số nguyên
@@ -238,7 +238,7 @@ public class AdminView {
         System.out.println("============================================================================================================================================================================================================================\n\n");
     }
 
-    private void showStaffByName(List<AdminModel> staff) {
+   public void showStaffByName(List<AdminModel> staff) {
         System.out.println("                                                                         Thông tin nhân viên   ");
         System.out.println("============================================================================================================================================================================================================================");
         System.out.printf(" %-15s| %15s |%25s |%15s |%15s |%15s |%15s |%15s |%30s |%30s  \n", "ID", "POSITION", "NAME", "AGE", "GENDER", "BIRTHDAY", "CCCD", "PHONE", "ADDRESS", "EMAIL");
@@ -247,6 +247,7 @@ public class AdminView {
         }
         System.out.println("=============================================================================================================================================================================================================================\n\n");
     }
+
 
     public static void main(String[] args) {
         AdminView a = new AdminView();

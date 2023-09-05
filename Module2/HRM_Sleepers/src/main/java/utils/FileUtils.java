@@ -1,6 +1,7 @@
 package utils;
 
 import model.IParseModel;
+import model.RegisterModel;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -64,6 +65,22 @@ public class FileUtils {
         }
 
 
+    }
+    public static void appendData(String filePath, RegisterModel registerModel) {
+        appendData(filePath, List.of(registerModel));
+    }
+
+    public static void appendData(String filePath, List<RegisterModel> data) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+            for (RegisterModel registerModel : data) {
+                String line = registerModel.getUsername() + "," + registerModel.getPassword() + "," + registerModel.getRole();
+                writer.write(line);
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Xử lý ngoại lệ nếu có lỗi trong quá trình ghi dữ liệu vào file
+        }
     }
 }
 

@@ -115,8 +115,6 @@ public class RegisterView implements IRegisterService {
 
     //Lưu thông tin vào file
     private void saveUser(RegisterModel registerModel) {
-        List<RegisterModel> registerList = getAllRegister();
-        registerList.add(registerModel);
-        FileUtils.writeData(fileLogin, registerList);
+        FileUtils.appendData(fileLogin, registerModel);
     }
 }

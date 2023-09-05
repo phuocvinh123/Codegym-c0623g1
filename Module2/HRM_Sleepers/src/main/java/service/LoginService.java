@@ -10,8 +10,11 @@ import view.StaffView;
 import java.util.List;
 import java.util.Scanner;
 
+
+
 public class LoginService implements ILoginService {
     private final String fileLogin = "./data/login.txt";
+    private  final String fileStaff = "./data/staff.txt";
     Scanner scanner = new Scanner(System.in);
 
     @Override
@@ -66,6 +69,16 @@ public class LoginService implements ILoginService {
             try {
                 if (validateLogin(username, password)) {
                     System.out.println("Đăng nhập thành công!");
+                    AdminService a = new AdminService();
+                    Long staffId = a.findStaffIdByUserName(fileStaff, username); // Thay đổi kiểu dữ liệu của staffId từ long sang Long
+
+                    if (staffId != null) {
+                        System.out.println("Mã ID nhân viên của bạn: " + staffId );
+                        // Tiếp tục thực hiện các hành động sau khi lấy được ID nhân viên
+                    } else {
+                        System.err.println("Không tìm thấy ID nhân viên cho tên đăng nhập này");
+                    }
+
                     // Kiểm tra vai trò người dùng sau khi xác thực thành công
                     if (getUserRole(username) == ERole.USER) {
                         // Chuyển hướng đến trang người dùng
@@ -78,6 +91,7 @@ public class LoginService implements ILoginService {
                         AdminView staffView = new AdminView();
                         staffView.launcher();
                     }
+
                     check = true;
                 } else {
                     System.err.println("Đăng nhập thất bại!");

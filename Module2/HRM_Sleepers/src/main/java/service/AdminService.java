@@ -3,17 +3,17 @@ package service;
 import model.AdminModel;
 import utils.FileUtils;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import static utils.FileUtils.readData;
+
 public class AdminService implements IAminService {
-    private final String fileStaff = "./data/staff.txt";
+    private  final String fileStaff = "./data/staff.txt";
 
     @Override
-    public List<AdminModel> getAllStaff() {
-        return FileUtils.readData(fileStaff, AdminModel.class);
+    public  List<AdminModel> getAllStaff() {
+        return readData(fileStaff, AdminModel.class);
     }
 
     @Override
@@ -72,7 +72,13 @@ public class AdminService implements IAminService {
         staffs = staffs.stream().filter(o -> o.getId() == id).collect(Collectors.toList());
         return staffs;
     }
-
-
-
+    public  long findStaffIdByUserName(String filename, String username) {
+        List<AdminModel> staffList = getAllStaff();
+        for (AdminModel staff : staffList) {
+            if (staff.getFullName().equals(username)) {
+                return staff.getId();
+            }
+        }
+        return 0; // hoặc giá trị mặc định phù hợp nếu không tìm thấy
+    }
 }

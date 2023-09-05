@@ -20,7 +20,7 @@ public class StaffView {
         while (true) {
             System.out.println("                                                           ╔════════════════════════════════════════════╗");
             System.out.println("                                                           ║       Trang thông tin nhân viên            ║");
-            System.out.println("                                                           ║      1. Xem thông tin nhân viên            ║");
+            System.out.println("                                                           ║      1. Xem thông tin cá nhân              ║");
             System.out.println("                                                           ║      2. Chấm công                          ║");
             System.out.println("                                                           ║      3. Hiển thị tổng số thời gian làm việc║");
             System.out.println("                                                           ║     trong 1 tháng                          ║");
@@ -95,7 +95,7 @@ public class StaffView {
 
     private void showStaff() {
         AdminView adminView = new AdminView();
-        adminView.showStaff();
+        adminView.searchStaffs();
     }
 
     private void menu() {

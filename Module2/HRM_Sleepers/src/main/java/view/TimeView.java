@@ -79,8 +79,6 @@ public class TimeView {
 
 
     public void checkIn() {
-        AdminView adminView = new AdminView();
-        adminView.showStaff();
         System.out.println("Check In - Nhập thông tin:");
         String staffId = enterStaffId();
         String code = enterCode();

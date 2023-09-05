@@ -28,6 +28,6 @@ public class RegisterModel implements IParseModel<RegisterModel> {
 
     @Override
     public String toString() {
-        return String.format("%s,%s,%s,%s,%s,%s", this.username, this.password, this.role);
+        return String.format("%s,%s,%s", this.username, this.password, this.role);
     }
 }

@@ -1,4 +1,4 @@
-10012,StaffServe,quangdang,32,Male,10-10-1994,123324654678,0783245678,12 An dương vương,tan@gmail.com,aaa121
+10012,StaffServe,tantay,32,Male,10-10-1994,123324654678,0783245678,12 An dương vương,tan@gmail.com,aaa121
 10023,servingFood,longNguyen,19,Male,18-05-2003,123324654678,0783245678,12 An dương vương,tan@gmail.com,aaa124
 10032,receptionist,datPham,19,Male,18-05-2003,123324654678,0783245678,12 An dương vương,tan@gmail.com,aaa125
 10043,RegionalChief,BaTuong,19,Male,18-05-2003,123324654678,0783245678,12 An dương vương,tan@gmail.com,aaa126
