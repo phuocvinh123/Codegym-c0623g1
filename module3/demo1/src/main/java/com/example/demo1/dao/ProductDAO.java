@@ -77,19 +77,5 @@ public class ProductDAO  extends DatabaseConnection{
         }
         return null;
     }
-    public void updateProduct(Product product){
-        String UPDATE_PRODUCT = "UPDATE products SET name = ?, price = ?, description = ?, category_id = ? WHERE id = ?";
 
-        try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_PRODUCT)) {
-            preparedStatement.setString(1, product.getName());
-            preparedStatement.setString(2, product.getDescription());
-            preparedStatement.setBigDecimal(3, product.getPrice());
-            preparedStatement.setInt(4, product.getCategory().getId());
-            preparedStatement.setInt(5, product.getId());
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
 }

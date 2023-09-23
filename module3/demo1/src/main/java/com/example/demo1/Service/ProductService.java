@@ -43,13 +43,7 @@ public class ProductService {
     }
     public void editProduct(int id, String name,BigDecimal price, String description,Category category){
         Product product = getProductById(id);
-        product.setName(name);
-        product.setPrice(price);
-        product.setDescription(description);
-        product.setCategory(category);
 
-        // Gọi phương thức updateProduct() để cập nhật thông tin sản phẩm trong cơ sở dữ liệu
-        productDAO.updateProduct(product);
     }
     public void remove(int id) {
         Product deleteProduct = getProductById(id);
