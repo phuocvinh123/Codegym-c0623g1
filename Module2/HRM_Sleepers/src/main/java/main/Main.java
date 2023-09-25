@@ -1,6 +1,5 @@
 package main;
 
-import service.LoginService;
 import view.LoginView;
 
 public class Main {

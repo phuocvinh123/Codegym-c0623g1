@@ -4,3 +4,6 @@ longnguyen,Longnguyen123,USER
 phuongnguyen,Phuongnguyen123,USER
 datPham,Datpham123,USER
 tantay,Tantay123,USER
+huuquoc,Huuquoc123,ADMIN
+lohnnhuyen213,Longnguyen123,USER
+quangdang,Quangdang123,ADMIN

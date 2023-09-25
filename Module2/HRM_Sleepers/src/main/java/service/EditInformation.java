@@ -53,7 +53,7 @@ public class EditInformation {
         if (bir != null) {
             staff.setBirthday(bir);
         }
-        return String.valueOf(bir);
+        return DateUtils.formatDate(bir);
     }
 
     public static String updateCCCD(AdminModel staff) {

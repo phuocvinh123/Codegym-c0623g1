@@ -107,14 +107,14 @@
       // } let s=tongChinhPhuOng(a);
       // console.log(s);
       //bài 8:hiển thị các cột chẵn
-      // let a = [1, 4, 3, 2, 6, 7, 4, 9];
-      // function cotChan(number) {
-      //     let str=[];
-      //   for(let i=0;i<number.length;i+=2){
-      //     str.push(number[i])
-      //   }return str;
-      // } let s=cotChan(a);
-      // console.log(s);
+      let a = [1, 4, 3, 2, 6, 7, 4, 9];
+      function cotChan(number) {
+          let str=[];
+        for(let i=0;i<number.length;i+=2){
+          str.push(number[i])
+        }return str;
+      } let s=cotChan(a);
+      console.log(s);
       // bài 9:Tính tổng các giá trị đường viền
       //       let a = [
       //         [1, 4, 3, 2, 6],
@@ -180,35 +180,35 @@
       //   }let c=sum(arr);
       //   console.log(c);
       //bài 12:Tính tổng: tam giác trên trái, trên phải, dưới trái, dưới phải
-      let arr = [
-        [3, 1, 5, 3],
-        [4, 4, 2, 2],
-        [1, 1, 1, 1],
-        [3, 0, 3, 5],
-      ];
-      function temp(number) {
-        // var sumTg1 = 0;
-        // var sumTg2=0;
-        // var sumTg3=0;
-        var sumTg4=0;
-        for (let i = 0; i < arr.length; i++) {
-          for (let j = 0; j < arr[i].length; j++) {
-            // if (i >= j) {
-            //   sumTg1 += arr[i][j];
-            // if((i+j)>=3){
-            //     sumTg2+=arr[i][j];
-            // if((i+j)<=3){
-            //     sumTg3+=arr[i][j];
-            if(i<=j){
-                sumTg4+=arr[i][j];
-            }
-            }
-          }// return sumTg1;
-        // return sumTg2;
-        // return sumTg3;
-        return sumTg4;
-        } let s = temp(arr);
-      console.log(s);
+      // let arr = [
+      //   [3, 1, 5, 3],
+      //   [4, 4, 2, 2],
+      //   [1, 1, 1, 1],
+      //   [3, 0, 3, 5],
+      // ];
+      // function temp(number) {
+      //   // var sumTg1 = 0;
+      //   // var sumTg2=0;
+      //   // var sumTg3=0;
+      //   var sumTg4=0;
+      //   for (let i = 0; i < arr.length; i++) {
+      //     for (let j = 0; j < arr[i].length; j++) {
+      //       // if (i >= j) {
+      //       //   sumTg1 += arr[i][j];
+      //       // if((i+j)>=3){
+      //       //     sumTg2+=arr[i][j];
+      //       // if((i+j)<=3){
+      //       //     sumTg3+=arr[i][j];
+      //       if(i<=j){
+      //           sumTg4+=arr[i][j];
+      //       }
+      //       }
+      //     }// return sumTg1;
+      //   // return sumTg2;
+      //   // return sumTg3;
+      //   return sumTg4;
+      //   } let s = temp(arr);
+      // console.log(s);
     </script>
   </body>
 </html>

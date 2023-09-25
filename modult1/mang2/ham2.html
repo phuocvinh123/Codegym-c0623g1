@@ -153,10 +153,10 @@
       //   let arr2 = number.reverse();
       //   for (let i = 0; i < number.length; i++) {
       //     if (number[i] !== arr2[i]) {
-      //       return false;
+      //       return "ma trận không đối xứng";
       //     }
       //   }
-      //   return true;
+      //   return "ma trận đối xứng";
       // }
       // console.log(arr(a));
       // console.log(arr(b));
@@ -166,9 +166,9 @@
       // function arr(number){
       //   for(let i=0; i<number.length;i++){
       //     if(number[i]<number[i-1]){
-      //       return false;
+      //       return "ma trận không tăng dần";
       //     }
-      //   }return true;
+      //   }return "ma trận tăng dần";
       // }console.log(arr(a));
       // console.log(arr(b));
       //bài 13:Hãy cho biết tất cả các phần tử trong mảng a có nằm trong mảng b không
@@ -191,11 +191,11 @@
       //   for (let i = 0; i < number.length; i++) {
       //     for (let j = 0; j < number[i].length; j++) {
       //       if (number[i][j] >= 0) {
-      //         return true;
+      //         return "ma trận toàn dương";
       //       }
       //     }
       //   }
-      //   return false;
+      //   return "ma trận không toàn dương";
       // }
       // console.log(arr(a));
       // bài 15:Kiểm tra một cột ma trận có giảm dần hay không
@@ -207,10 +207,10 @@
       // function arr(maxT) {
       //   for (let i = 0; i < maxT.length; i++) {
       //     if (maxT[i] > maxT[i - 1]) {
-      //       return false;
+      //       return "ma trận không giảm dần";
       //     }
       //   }
-      //   return true;
+      //   return "ma trận giảm dần";
       // }
       // console.log(arr(a));
       //bài 16:Kiểm tra ma trận có tồn tại số lẻ hay không
@@ -220,32 +220,92 @@
       //   [8, 6, 3],
       // ];
       // function arr(number) {
-      //   let str = [];
       //   for (let i = 0; i < number.length; i++) {
       //     for (let j = 0; j < number[i].length; j++) {
       //       if (number[i][j] % 2 !== 0) {
-      //         str += number[i][j];
+      //         return "ma trận tồn tại số lẻ"
+      //       }
+      //     }
+      //   }
+      //   return "ma trận không tồn tại số lẻ";
+      // }
+      // console.log(arr(a));
+      // bài 17: Liệt kê các dòng giảm dần trong ma trận
+      let a = [
+        [1, 2, 3],
+        [4, 5, 3],
+        [8, 6, 3],
+      ];
+      function arr(number) {
+        let old = '';
+        for (let i = 0; i < number.length; i++) {
+          let count = 0;
+          for (let j = 0; j < number[i].length; j++) {
+            if (number[i][j] > number[i][j + 1]) {
+              count++;
+              if (count == number[i].length - 1) {
+                old += '' + i;
+              }
+            }
+          }
+        }
+        return old;
+      }
+      console.log(arr(a));
+      //bài 18:Tìm số chẵn đầu tiên trong ma trận
+      // let a = [
+      //   [1, 2, 3],
+      //   [4, 5, 3],
+      //   [8, 6, 3],
+      // ];
+      // function arr(number) {
+      //   for (let i = 0; i < number.length; i++) {
+      //     for (let j = 0; j < number[i].length; j++) {
+      //       if (number[i][j] % 2 == 0) {
+      //         return [i, j];
       //       }
       //     }
       //   }
       //   return str;
       // }
       // console.log(arr(a));
-      //bài 17: Liệt kê các dòng giảm dần trong ma trận
-      let a = [
-        [1, 2, 3],
-        [4, 2, 3],
-        [8, 6, 3],
-      ];
-      function arr(number){
-        let total=0;
-        for(let i=0;i<number.length;i++){
-          for(let j=0;i<number[i].length;j++){
-            total+=number[i][j];
-            
-          }
-        }return total;
-      }console.log(arr(a));
+      //bài 19:Tìm số chẵn lớn nhất trong ma trận
+      // let a = [
+      //   [1, 2, 3],
+      //   [4, 5, 3],
+      //   [8, 6, 3],
+      // ];
+      // function arr(number) {
+      //   let max = number[0][0];
+      //   count = "";
+      //   for (let i = 0; i < number.length; i++) {
+      //     for (let j = 0; j < number[i].length; j++) {
+      //       if (number[i][j] > max) {
+      //         max = number[i][j];
+      //       }
+      //     }
+      //   }
+      //   return max;
+      // }
+      // console.log(arr(a));
+      //bài 20:Liệt kê các dòng có tổng lớn nhất
+      // let a = [
+      //   [1, 2, 3],
+      //   [4, 5, 3],
+      //   [8, 6, 3],
+      // ];
+      // function arr(number) {
+      //   let str = [];
+      //   for (let i = 0; i < number.length; i++) {
+      //     let total = 0;
+      //     for (let j = 0; j < number[i].length; j++) {
+      //       total += number[i][j];
+      //     }
+      //     str.push(total);
+      //   }
+      //   return str;
+      // }
+      // console.log(arr(a));
     </script>
   </body>
 </html>

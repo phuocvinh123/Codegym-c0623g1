@@ -20,13 +20,12 @@ import static utils.FileUtils.readData;
 
 public class TimeView {
     private Scanner scanner = new Scanner(System.in);
-    private String currentStaffId;
+
     private static String checkedInStaffId = "";
     TimeService timeService = new TimeService();
     OvertimeView overtimeView = new OvertimeView();
 
     public void launcher() {
-        boolean checkAction = false;
         while (true) {
             System.out.println("                                                           ╔════════════════════════════════════════════╗");
             System.out.println("                                                           ║       Nỗ lực hết mình trong công việc,     ║");
@@ -34,6 +33,7 @@ public class TimeView {
             System.out.println("                                                           ║      1.Check In (bắt đầu làm việc thôi nào)║");
             System.out.println("                                                           ║      0. Quay lại                           ║");
             System.out.println("                                                           ╚════════════════════════════════════════════╝");
+            System.out.print("mời chọn chức năng: ");
             int actionMenu = Integer.parseInt(scanner.nextLine());
             switch (actionMenu) {
                 case 0 -> {
@@ -62,6 +62,7 @@ public class TimeView {
             System.out.println("                                                           ║                1.Check Out                 ║");
             System.out.println("                                                           ║                0. Quay lại                 ║");
             System.out.println("                                                           ╚════════════════════════════════════════════╝");
+            System.out.print("mời chọn chức năng: ");
             int actionMenu = Integer.parseInt(scanner.nextLine());
             switch (actionMenu) {
                 case 0 -> {
@@ -102,9 +103,11 @@ public class TimeView {
         String answer = scanner.nextLine();
         if (answer.equalsIgnoreCase("yes")) {
             overtimeView.overtime(checkedInStaffId);
+            StaffView staffView = new StaffView();
+            staffView.launcher1();
         } else {
             StaffView staffView = new StaffView();
-            staffView.launcher();
+            staffView.launcher1();
         }
     }
 
@@ -134,7 +137,7 @@ public class TimeView {
 
     public static void main(String[] args) {
         TimeView timeView = new TimeView();
-        timeView.checkIn();
+        timeView.launcher();
     }
 
 }

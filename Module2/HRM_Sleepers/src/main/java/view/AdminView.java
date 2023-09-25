@@ -32,6 +32,7 @@ public class AdminView {
             System.out.println("                                                           ║      7. Hiển thị lương của tất cả nhân viên║");
             System.out.println("                                                           ║      0. Quay lại                           ║");
             System.out.println("                                                           ╚════════════════════════════════════════════╝");
+            System.out.print("mời chọn chức năng: ");
             int actionMenu = Integer.parseInt(scanner.nextLine());
             switch (actionMenu) {
                 case 0 -> {
@@ -74,8 +75,7 @@ public class AdminView {
 
     public void searchStaffs() {
         System.out.print("Nhập id muốn tìm kiếm: ");
-        long id = scanner.nextLong();
-        scanner.nextLine(); // Đọc bỏ ký tự new line sau khi đọc số nguyên
+        long id =Long.parseLong(scanner.nextLine()) ;
         List<AdminModel> staff = iStaffService.searchStaff(id);
         showStaffByName(staff);
     }
@@ -92,6 +92,7 @@ public class AdminView {
         System.out.println("                                                           ║      Nhập 1. Tăng dần                      ║");
         System.out.println("                                                           ║      Nhập 2. Giảm dần                      ║");
         System.out.println("                                                           ╚════════════════════════════════════════════╝");
+        System.out.print("mời chọn chức năng: ");
         int action = Integer.parseInt(scanner.nextLine());
         List<AdminModel> staffs = iStaffService.getAllStaff();
         Comparator<AdminModel> comparator = null;
@@ -106,7 +107,7 @@ public class AdminView {
                 staffs.sort(sortUserAscending(comparator));
                 break;
         }
-        showStaff(staffs);
+        showStaffByName(staffs);
     }
 
     private Comparator<AdminModel> sortUserDecreasing(Comparator<AdminModel> comparator) {
@@ -120,6 +121,7 @@ public class AdminView {
         System.out.println("                                                           ║      5.Age                                 ║");
         System.out.println("                                                           ║      6.DOB                                 ║");
         System.out.println("                                                           ╚════════════════════════════════════════════╝");
+        System.out.print("mời chọn chức năng: ");
         int action = Integer.parseInt(scanner.nextLine());
         switch (action) {
             case 0:
@@ -158,6 +160,7 @@ public class AdminView {
         System.out.println("                                                           ║      5.Age                                 ║");
         System.out.println("                                                           ║      6.DOB                                 ║");
         System.out.println("                                                           ╚════════════════════════════════════════════╝");
+        System.out.print("mời chọn chức năng: ");
         int action = Integer.parseInt(scanner.nextLine());
         switch (action) {
             case 0:
@@ -228,15 +231,6 @@ public class AdminView {
         System.out.println("========================================================================================================================================================================================================================\n\n");
     }
 
-    private void showStaff(List<AdminModel> staff) {
-        System.out.println("                                                                         Thông tin nhân viên   ");
-        System.out.println("==========================================================================================================================================================================================================================");
-        System.out.printf(" %-15s| %15s |%25s |%15s |%15s |%15s |%15s |%15s |%30s |%30s  \n", "ID", "POSITION", "NAME", "AGE", "GENDER", "BIRTHDAY", "CCCD", "PHONE", "ADDRESS", "EMAIL");
-        for (AdminModel s : staff) {
-            System.out.printf(" %-15s| %15s |%25s |%15s |%15s |%15s |%15s |%15s |%30s |%30s  \n", s.getId(), s.getPosition(), s.getFullName(), s.getAge(), s.getGender(), DateUtils.formatDate(s.getBirthday()), s.getCccd(), s.getPhone(), s.getAddress(), s.getEmail());
-        }
-        System.out.println("============================================================================================================================================================================================================================\n\n");
-    }
 
    public void showStaffByName(List<AdminModel> staff) {
         System.out.println("                                                                         Thông tin nhân viên   ");

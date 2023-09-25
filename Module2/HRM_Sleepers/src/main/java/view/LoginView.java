@@ -24,6 +24,7 @@ public class LoginView {
             System.out.println("                                           ║              0. Exit(Thoát chương trình)                  ║");
             System.out.println("                                           ║                                                           ║");
             System.out.println("                                           ╚═══════════════════════════════════════════════════════════╝");
+            System.out.print("mời chọn chức năng: ");
             int number = Integer.parseInt(scanner.nextLine());
             switch (number) {
                 case 1 -> menuLogin();

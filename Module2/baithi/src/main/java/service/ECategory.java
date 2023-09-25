@@ -1,2 +1,5 @@
-package service;public enum ECategory {
+package service;
+
+public enum ECategory {
+    PHONE, LAPTOP
 }

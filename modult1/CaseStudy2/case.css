@@ -5,7 +5,7 @@
   }
   
   body {
-    background-color: rgb(127, 234, 255);
+    background-color: rgb(255, 236, 127);
     font-family: Arial, sans-serif;
   }
   
@@ -13,7 +13,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
   }
   
   .myapp {
@@ -120,10 +119,4 @@
       width: 100%;
     }
   }
-  #tb-body>img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 60%;
-    
-}
+ 

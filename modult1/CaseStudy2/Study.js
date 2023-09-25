@@ -17,9 +17,12 @@ getProductFromStorage();
 function getProductFromStorage(){
     if(localStorage.getItem(KEY_PRODUCT) == null){
         products = [
-            new Product(1,'https://img4.thuthuatphanmem.vn/uploads/2021/02/10/anh-socola-valentine-trai-tim-dep-nhat_124254618.jpg','socola','ngon nhất thế giới',10,1000),
-            new Product(),
-            new Product(),
+            new Product(1,'product_1.png','Fried shrimp with cheese','món ăn 1',10,120000),
+            new Product(2,'product_2.png','Avocado and egg toast','món ăn 2',6,120000),
+            new Product(3,'product_3.png','Green house salad','món ăn 3',5,220000),
+            new Product(4,'product_4.png','Chicken burger','món ăn 4',9,123000),
+            new Product(5,'product_5.png','Classic ceasar salad','món ăn 5',5,320000),
+            new Product(6,'product_6.png','Grilled fish with orange sauce','món ăn 6',8,120000),
         ];
         localStorage.setItem(KEY_PRODUCT, JSON.stringify(products));
     }else{
@@ -186,54 +189,6 @@ function deleteProduct(id){
     for(let i=0; i<products.length; i++){
         if(products[i].id == id){
             products.splice(i, 1);
-        }
-    }
-}
-// thêm
-// Khởi tạo checked_list
-
-
-function checkbox1() {
-    let checked_list = [];
-  if (document.getElementById('checkbox1').checked) {
-    // Xóa các giá trị cũ trong checked_list nếu có
-    checked_list.length = 0;
-
-    // Lặp qua các sản phẩm và thêm id của từng sản phẩm vào checked_list
-    for (let i = 0; i < products.length; i++) {
-      checked_list.push(products[i].id);
-      document.getElementById(`checkbox${products[i].id}`).checked == true;
-    }
-  } else {
-    // Lặp qua các sản phẩm và bỏ check các checkbox
-    for (let i = 0; i < products.length; i++) {
-      document.getElementById(`checkbox${products[i].id}`).checked == false;
-    }
-
-    // Xóa toàn bộ giá trị trong checked_list
-    checked_list.length = 0;
-  }
-
-  console.log(checked_list);
-}
-function remove() {
-    if (checked_list.length == 0) {
-        alert('Please choose one to remove');
-    }
-    else {
-        let confirmed = confirm('bạn có muốn xóa hết sản phẩm');
-        if (confirmed) {
-            for (let id of checked_list) {
-                products = products.filter(function (product) {
-                    return product.id != id;
-                })
-                localStorage.setItem(products_prd, JSON.stringify(products));
-                renderTable();
-                checked_list = [];
-                document.querySelector('#checkbox1').checked = false;
-            }
-        } else {
-            document.querySelectorAll('.check-box').checked = false;
         }
     }
 }
