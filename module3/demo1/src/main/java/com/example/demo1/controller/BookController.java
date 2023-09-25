@@ -127,6 +127,5 @@ public class BookController extends HttpServlet {
         bookService = new BookService();
         categoryService = new CategoryService();
         authorService = new AuthorService();
-        bookService = new BookService();
     }
 }
