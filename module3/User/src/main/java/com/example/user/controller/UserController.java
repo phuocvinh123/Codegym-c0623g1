@@ -45,27 +45,24 @@ public class UserController extends HelloServlet {
 
 
     private void showList(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String pageString = req.getParameter("page");
-        if (pageString == null) {
-            pageString = "1";
-        }
-
-        req.setAttribute("page", userService.getUsers(Integer.parseInt(pageString)));
-        req.setAttribute("message", req.getParameter("message"));
-        req.getRequestDispatcher("user/index.jsp").forward(req, resp);
+        showTable(req, false, resp);
     }
 
     private void showEdit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("user", userService.getUsers(Integer.parseInt(req.getParameter("id"))));
+        req.setAttribute("userss", userService.findById(Integer.parseInt(req.getParameter("id"))));
+        req.setAttribute("gender", EGender.values());
         req.setAttribute("role", roleService.getRoles());
         req.getRequestDispatcher("user/create.jsp").forward(req, resp);
-    }
-
-    private void delete(HttpServletRequest req, HttpServletResponse resp) {
 
     }
 
-    private void showRestore(HttpServletRequest req, HttpServletResponse resp) {
+    private void delete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        userService.delete(Integer.parseInt(req.getParameter("id")));
+        resp.sendRedirect("/user?message=Deleted");
+    }
+
+    private void showRestore(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        showTable(req, true, resp);
     }
 
     private void showCreate(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -73,6 +70,18 @@ public class UserController extends HelloServlet {
         req.setAttribute("gender", EGender.values());
         req.setAttribute("role", roleService.getRoles());
         req.getRequestDispatcher("user/create.jsp").forward(req, resp);
+    }
+
+    private void showTable(HttpServletRequest req, boolean isShowRestore, HttpServletResponse resp) throws ServletException, IOException {
+        String pageString = req.getParameter("page");
+        if (pageString == null) {
+            pageString = "1";
+        }
+        req.setAttribute("page", userService.getUsers(Integer.parseInt(pageString), isShowRestore, req.getParameter("search")));
+        req.setAttribute("message", req.getParameter("message"));
+        req.setAttribute("isShowRestore", isShowRestore);
+        req.setAttribute("search", req.getParameter("search"));
+        req.getRequestDispatcher("user/index.jsp").forward(req, resp);
     }
 
     @Override
@@ -85,6 +94,7 @@ public class UserController extends HelloServlet {
             case "create" -> create(req, resp);
             case "edit" -> edit(req, resp);
             case "restore" -> restore(req, resp);
+
         }
     }
 
@@ -93,7 +103,9 @@ public class UserController extends HelloServlet {
         resp.sendRedirect("/user?message=Updated");
     }
 
-    private void restore(HttpServletRequest req, HttpServletResponse resp) {
+    private void restore(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        userService.restore(req.getParameterValues("restore"));
+        resp.sendRedirect("/user?message=Restored&action=restore");
     }
 
     private void create(HttpServletRequest req, HttpServletResponse resp) throws IOException {
