@@ -15,6 +15,16 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" rel="stylesheet">
+    <style>
+        .error-message {
+            display: none;
+            color: red;
+            margin-top: 5px;
+        }
+    </style>
+
+
+
 </head>
 <body>
 <div class="container">
@@ -27,10 +37,15 @@
             <label for="username">Tên tài khoản</label>
             <input type="text" class="form-control" id="username" name="username" required>
         </div>
-
         <div class="mb-3">
-            <label for="password">Mật khẩu</label>
-            <input type="password" class="form-control" id="password" name="password" required>
+            <label for="re_password" class="form-label">Mật khẩu</label>
+            <input type="password" class="form-control" id="re_password" name="re_password" >
+
+        </div>
+        <div class="mb-3">
+            <label for="password">nhập lại Mật khẩu</label>
+            <input type="password" class="form-control" id="password" name="password" required onblur="checkPassword()">
+            <div id="passwordMatchError" class="error-message">Mật khẩu không trùng khớp</div>
         </div>
 
         <div class="mb-3">
@@ -67,12 +82,27 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous">
+
+</script>
 <script>
     const message = document.getElementById('message');
     if (message !== null && message.innerHTML) {
         toastr.success(message.innerHTML);
     }
+
+    function checkPassword() {
+        var password = document.getElementById('password').value;
+        var rePassword = document.getElementById('re_password').value;
+        var errorDiv = document.getElementById('passwordMatchError');
+
+        if (rePassword !== password) {
+            errorDiv.style.display = 'block';
+        } else {
+            errorDiv.style.display = 'none';
+        }
+    }
+
 </script>
 </body>
 </html>
