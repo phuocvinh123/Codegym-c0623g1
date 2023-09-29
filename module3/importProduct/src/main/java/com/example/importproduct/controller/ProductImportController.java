@@ -18,7 +18,6 @@ import java.io.IOException;
 @WebServlet(urlPatterns = "/product-import", name = "productImportController")
 public class ProductImportController extends HttpServlet {
     private ProductService productService;
-    private ProductDao productDao;
     private ProductImportService productImportService;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -29,11 +28,15 @@ public class ProductImportController extends HttpServlet {
         switch (action) {
             case "create" -> showCreate(req, resp);
             case "edit" -> showEdit(req,resp);
-//            case "restore" -> showRestore(req, resp);
+            case "restore" -> showRestore(req, resp);
             case "delete" -> delete(req, resp);
             default -> showList(req, resp);
         }
 
+    }
+
+    private void showRestore(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        showTable(req, true, resp);
     }
 
     private void delete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -58,13 +61,18 @@ public class ProductImportController extends HttpServlet {
         req.setAttribute("productsJSON", new ObjectMapper().writeValueAsString(products));
         req.getRequestDispatcher("product-import/create.jsp").forward(req,resp);
     }
-
     private void showList(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        showTable(req, false, resp);
+    }
+
+    private void showTable(HttpServletRequest req, boolean isShowRestore, HttpServletResponse resp)  throws ServletException, IOException {
         String pageString = req.getParameter("page");
         if (pageString == null) {
             pageString = "1";
         }
-        req.setAttribute("page", productImportService.findAll(Integer.parseInt(pageString)));
+        req.setAttribute("page", productImportService.findAll(Integer.parseInt(pageString), isShowRestore, req.getParameter("search")));
+        req.setAttribute("isShowRestore", isShowRestore);
+        req.setAttribute("search", req.getParameter("search"));
         req.setAttribute("message",req.getParameter("message"));
         req.getRequestDispatcher("product-import/index.jsp").forward(req,resp);
     }
@@ -78,8 +86,14 @@ public class ProductImportController extends HttpServlet {
         switch (action) {
             case "create" -> create(req, resp);
             case "edit" -> edit(req, resp);
-//            case "restore" -> restore(req, resp);
+            case "restore" -> restore(req, resp);
         }
+    }
+
+    private void restore(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        productImportService.restore(req.getParameterValues("restore"));
+        resp.sendRedirect("/product-import?message=Restored&action=restore");
+
     }
 
     private void edit(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -96,6 +110,5 @@ public class ProductImportController extends HttpServlet {
     public void init() throws ServletException {
         productService = new ProductService();
         productImportService = new ProductImportService();
-        productDao = new ProductDao();
     }
 }

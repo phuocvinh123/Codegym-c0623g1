@@ -27,10 +27,10 @@
 
 
     <div >
-<%--      <c:if test="${!isShowRestore}">--%>
+     <c:if test="${!isShowRestore}">
         <div class="d-grid gap-2 d-md-block">
           <a href="/product-import?action=create" class="btn btn-primary mb-2">Create</a>
-          <a href="/product-import=restore" class="btn btn-primary mb-2">Restore</a>
+          <a href="/product-import?action=restore" class="btn btn-primary mb-2">Restore</a>
         </div>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
           <form action="/product-import?page=${page.currentPage}">
@@ -38,15 +38,15 @@
             <button id="searchButton" class="btn btn-primary">Search</button>
           </form>
         </div>
-<%--      </c:if>--%>
-<%--      <c:if test="${isShowRestore}">--%>
-<%--      <form action="/product?action=restore" method="post">--%>
+      </c:if>
+      <c:if test="${isShowRestore}">
+      <form action="/product-import?action=restore" method="post">
 
-<%--        <div>--%>
-<%--          <a href="/product" class="btn btn-primary mb-2">Home</a>--%>
-<%--          <button type="submit" class="btn btn-primary mb-2">Restore All</button>--%>
-<%--        </div>--%>
-<%--        </c:if>--%>
+        <div>
+          <a href="/product-import" class="btn btn-primary mb-2">Home</a>
+          <button type="submit" class="btn btn-primary mb-2">Restore All</button>
+        </div>
+        </c:if>
 
     </div>
     <table class="table table-striped">
@@ -66,7 +66,7 @@
         <td>
           Total Amount
         </td>
-        <td>
+        <td id="selectAllCheckbox">
           Action
         </td>
       </tr>
@@ -88,12 +88,20 @@
               ${productImport.totalAmount}
           </td>
           <td>
+            <c:if test="${!isShowRestore}">
             <a href="/product-import?action=edit&id=${productImport.id}" class="btn btn-warning">Edit</a>
             <a href="/product-import?action=delete&id=${productImport.id}" class="btn btn-danger">Delete</a>
+            </c:if>
+            <c:if test="${isShowRestore}">
+              <input type="checkbox" name="restore" value="${productImport.id}" class="form-check-input checkbox"  />
+            </c:if>
           </td>
         </tr>
       </c:forEach>
     </table>
+    <c:if test="${isShowRestore}">
+      </form>
+    </c:if>
     <nav aria-label="...">
       <c:set var="url" value="/product-import?page="/>
       <c:if test="${isShowRestore}">
@@ -132,6 +140,16 @@
   if (message !== null && message.innerHTML) {
     toastr.success(message.innerHTML);
   }
+  const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+  const checkboxes = document.getElementsByClassName('checkbox');
+  let checked = true;
+  selectAllCheckbox.addEventListener('click', function () {
+    Array.from(checkboxes).forEach(function (checkbox) {
+      checkbox.checked = checked;
+
+    });
+    checked = !checked;
+  });
 </script>
 </body>
 </html>

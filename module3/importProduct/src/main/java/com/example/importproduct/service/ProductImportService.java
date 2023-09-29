@@ -77,8 +77,8 @@ public class ProductImportService {
     public ProductImport findById(int id){
         return productImportDAO.findById(id);
     }
-    public Page<ProductImportListResponse> findAll(int page) {
-        return productImportDAO.findAll(page);
+    public Page<ProductImportListResponse> findAll(int page,boolean isShowRestore ,String search) {
+        return productImportDAO.findAll(page ,isShowRestore,search);
     }
 
 
@@ -87,5 +87,10 @@ public class ProductImportService {
         productImportDAO.deleteImportDetail1(id);
         productImportDAO.deleteProductImport(id);
     }
-
+    public void restore(String[] ids){
+        for (var id : ids) {
+            productImportDAO.restoreProductImport(Integer.parseInt(id));
+            productImportDAO.restoreImportDetail1(Integer.parseInt(id));
+        }
+    }
 }

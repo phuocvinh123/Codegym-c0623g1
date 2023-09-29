@@ -57,25 +57,36 @@ public class ProductImportDAO extends DatabaseConnection {
         }
     }
 
-    public Page<ProductImportListResponse> findAll(int page) {
+    public Page<ProductImportListResponse> findAll(int page ,boolean isShowRestore,String search) {
         var result = new Page<ProductImportListResponse>();
         final int TOTAL_ELEMENT = 3;
         result.setCurrentPage(page);
         var content = new ArrayList<ProductImportListResponse>();
+        if(search == null){
+            search = "";
+        }
+        search = "%" + search.toLowerCase() + "%";
+        final var DELETED = isShowRestore ? 1 : 0;
         String SELECT_ALL = "SELECT pi.id, pi.`code`, pi.import_date, GROUP_CONCAT(p.`name`) products, pi.total_amount FROM " +
-                "product_imports pi " +
-                "LEFT JOIN product_import_details pid on pi.id = pid.product_import_id " +
-                "LEFT JOIN products p on p.id = pid.product_id GROUP BY pi.id" +
+                " product_imports pi " +
+                " LEFT JOIN product_import_details pid on pi.id = pid.product_import_id " +
+                " LEFT JOIN products p on p.id = pid.product_id  " +
+                " WHERE pid.deleted= ? AND (LOWER(pi.`code`) LIKE ? OR LOWER(p.`name`) LIKE ? OR LOWER(pi.import_date) LIKE ?) GROUP BY pi.id " +
                 " LIMIT ? OFFSET ?";
         ;
         var SELECT_COUNT = "SELECT COUNT(1) cnt " +
-                "FROM product_imports pi " +
-                "LEFT JOIN product_import_details pid on pi.id = pid.product_import_id " +
-                "LEFT JOIN products p on p.id = pid.product_id GROUP BY pi.id";
+                " FROM product_imports pi " +
+                " LEFT JOIN product_import_details pid on pi.id = pid.product_import_id " +
+                " LEFT JOIN products p on p.id = pid.product_id  "+
+                " WHERE pid.deleted= ? AND (LOWER(pi.`code`) LIKE ? OR LOWER(p.`name`) LIKE ? OR LOWER(pi.import_date) LIKE ?) GROUP BY pi.id" ;
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL)) {
-            preparedStatement.setInt(1,TOTAL_ELEMENT);
-            preparedStatement.setInt(2, (page - 1) * TOTAL_ELEMENT);
+            preparedStatement.setInt(1, DELETED );
+            preparedStatement.setString(2, search);
+            preparedStatement.setString(3, search);
+            preparedStatement.setString(4, search);
+            preparedStatement.setInt(5,TOTAL_ELEMENT);
+            preparedStatement.setInt(6, (page - 1) * TOTAL_ELEMENT);
             System.out.println(preparedStatement);
             var rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -89,6 +100,10 @@ public class ProductImportDAO extends DatabaseConnection {
             }
             result.setContent(content);
             var preparedStatementCount = connection.prepareStatement(SELECT_COUNT);
+            preparedStatementCount.setInt(1, DELETED);
+            preparedStatementCount.setString(2, search);
+            preparedStatementCount.setString(3, search);
+            preparedStatementCount.setString(4, search);
             var rsCount = preparedStatementCount.executeQuery();
             if(rsCount.next()){
                 result.setTotalPage((int) Math.ceil((double) rsCount.getInt("cnt") /TOTAL_ELEMENT));
@@ -145,7 +160,7 @@ public class ProductImportDAO extends DatabaseConnection {
     }
 
     public void deleteImportDetail1(int id) {
-        String DELETE_IMPORT_DETAIL = "DELETE FROM `product`.`product_import_details` WHERE (`product_import_id` = ?);";
+        String DELETE_IMPORT_DETAIL = "UPDATE `product`.`product_import_details` SET `deleted` = '1' WHERE (`product_import_id` = ?);";
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_IMPORT_DETAIL)) {
             preparedStatement.setInt(1, id);
@@ -156,7 +171,7 @@ public class ProductImportDAO extends DatabaseConnection {
         }
     }
     public void deleteProductImport(int id) {
-        String DELETE_IMPORT_DETAIL = "DELETE FROM `product`.`product_imports`WHERE  (`id`=?)";
+        String DELETE_IMPORT_DETAIL = "UPDATE `product`.`product_imports` SET `deleted` = '1' WHERE  (`id`=?)";
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_IMPORT_DETAIL)) {
             preparedStatement.setInt(1, id);
@@ -166,6 +181,8 @@ public class ProductImportDAO extends DatabaseConnection {
             System.out.println(e.getMessage());
         }
     }
+
+
     public void updateProductImport(ProductImport productImport){
         String CREATE = "UPDATE `product`.`product_imports` SET `code` = ?, `import_date` = ?, `total_amount` = ? WHERE (`id` = ?);";
 
@@ -179,8 +196,29 @@ public class ProductImportDAO extends DatabaseConnection {
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            ;
+
         }
     }
+    public void restoreImportDetail1(int id) {
+        String DELETE_IMPORT_DETAIL = "UPDATE `product`.`product_import_details` SET `deleted` = '0' WHERE (`product_import_id` = ?);";
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_IMPORT_DETAIL)) {
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
 
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public void restoreProductImport(int id) {
+        String DELETE_IMPORT_DETAIL = "UPDATE `product`.`product_imports` SET `deleted` = '0' WHERE  (`id`=?)";
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_IMPORT_DETAIL)) {
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
