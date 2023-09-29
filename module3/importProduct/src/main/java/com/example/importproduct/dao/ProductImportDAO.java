@@ -3,9 +3,9 @@ package com.example.importproduct.dao;
 
 import com.example.importproduct.model.Product;
 import com.example.importproduct.model.ProductImport;
+import com.example.importproduct.model.ProductImportDetail;
 import com.example.importproduct.service.dto.Page;
 import com.example.importproduct.service.dto.ProductImportListResponse;
-import com.example.importproduct.service.dto.Show;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -53,7 +53,7 @@ public class ProductImportDAO extends DatabaseConnection {
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            ;
+
         }
     }
 
@@ -98,29 +98,89 @@ public class ProductImportDAO extends DatabaseConnection {
         }
         return  result;
     }
-    public List<Show> findAllShow(int id){
-        var result = new ArrayList<Show>();
-        String SELECT_ALL = "SELECT pid.id ,p.`name` as `product` ,pid.`quantity`,pid.`amount` FROM " +
-                "  product_imports pi  " +
-                " JOIN product_import_details pid on pi.id = pid.product_import_id" +
-                " JOIN products p on p.id = pid.product_id where pi.id= ? ";
+
+    public ProductImport findById(int id) {
+        String FIND_BY_ID = "SELECT pi.*, pid.id pid_id, pid.product_id p_id, pid.amount, pid.quantity  FROM product_imports as pi " +
+                "JOIN product_import_details pid on pid.product_import_id = pi.id WHERE pi.id = ?";
+
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL)) {
-            preparedStatement.setInt(1, id );
+             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID)) {
             System.out.println(preparedStatement);
+            preparedStatement.setInt(1, id);
             var rs = preparedStatement.executeQuery();
+            ProductImport productImport = new ProductImport();
+            var productImportDetails = new ArrayList<ProductImportDetail>();
             while (rs.next()) {
-                result.add(new Show(
-                        rs.getInt("id"),
-                        rs.getString("product"),
-                        rs.getInt("quantity"),
-                        rs.getBigDecimal("amount")
-                ));
+                productImport.setCode(rs.getString("code"));
+                productImport.setId(rs.getInt("id"));
+                productImport.setImportDate(rs.getDate("import_date"));
+                productImport.setTotalAmount(rs.getBigDecimal("total_amount"));
+                var productImportDetail = new ProductImportDetail();
+                productImportDetail.setId(rs.getInt("pid_id"));
+                productImportDetail.setProduct(new Product(rs.getInt("p_id")));
+                productImportDetail.setAmount(rs.getBigDecimal("amount"));
+                productImportDetail.setQuantity(rs.getInt("quantity"));
+                productImportDetails.add(productImportDetail);
+
             }
-        }catch (Exception e){
+            productImport.setProductImportDetails(productImportDetails);
+            return productImport;
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return result;
+        return null;
+    }
+    public void deleteImportDetail(int productImportId) {
+
+        String DELETE_IMPORT_DETAIL = "DELETE FROM `product`.`product_import_details` WHERE (`product_import_id` = ?);";
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_IMPORT_DETAIL)) {
+            preparedStatement.setInt(1, productImportId);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void deleteImportDetail1(int id) {
+        String DELETE_IMPORT_DETAIL = "DELETE FROM `product`.`product_import_details` WHERE (`product_import_id` = ?);";
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_IMPORT_DETAIL)) {
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public void deleteProductImport(int id) {
+        String DELETE_IMPORT_DETAIL = "DELETE FROM `product`.`product_imports`WHERE  (`id`=?)";
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_IMPORT_DETAIL)) {
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public void updateProductImport(ProductImport productImport){
+        String CREATE = "UPDATE `product`.`product_imports` SET `code` = ?, `import_date` = ?, `total_amount` = ? WHERE (`id` = ?);";
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(CREATE)) {
+            preparedStatement.setString(1, productImport.getCode());
+            preparedStatement.setDate(2, productImport.getImportDate());
+            preparedStatement.setBigDecimal(3, productImport.getTotalAmount());
+            preparedStatement.setInt(4, productImport.getId());
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            ;
+        }
     }
 
 }

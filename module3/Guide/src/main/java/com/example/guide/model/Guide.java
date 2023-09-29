@@ -4,7 +4,6 @@ import com.example.guide.Enum.EGender;
 import com.example.guide.Enum.EStatusGuide;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class Guide {
     private int id;

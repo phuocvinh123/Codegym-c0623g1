@@ -133,6 +133,7 @@ public class ProductDao extends DatabaseConnection{
         }
         return null;
     }
+
     public List<Product> findAll(){
         var content = new ArrayList<Product>();
         var SELECT_ALL = "SELECT p.*, c.name category_name " +

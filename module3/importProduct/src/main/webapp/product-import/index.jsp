@@ -88,7 +88,8 @@
               ${productImport.totalAmount}
           </td>
           <td>
-            <a class="btn btn-primary" href="/product-import?action=show&id=${productImport.id}">show</a>
+            <a href="/product-import?action=edit&id=${productImport.id}" class="btn btn-warning">Edit</a>
+            <a href="/product-import?action=delete&id=${productImport.id}" class="btn btn-danger">Delete</a>
           </td>
         </tr>
       </c:forEach>

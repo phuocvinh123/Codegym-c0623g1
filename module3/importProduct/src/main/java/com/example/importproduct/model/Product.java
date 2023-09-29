@@ -20,6 +20,14 @@ public class Product {
         this.quantity = quantity;
         this.category = category;
     }
+    public Product(String name,  int quantity, BigDecimal price) {
+        this.name = name;
+        this.quantity = quantity;
+        this.price = price;
+    }
+    public Product(int id) {
+        this.id = id;
+    }
 
     public int getQuantity() {
         return quantity;
