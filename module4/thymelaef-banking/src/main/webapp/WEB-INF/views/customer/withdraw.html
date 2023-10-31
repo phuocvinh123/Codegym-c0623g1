@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Deposit money into Customer's account</title>
+    <title>Deposit</title>
     <th:block th:replace="layout/head :: head"/>
 </head>
 <body>
@@ -9,7 +9,7 @@
     <header>
         <nav class="navbar bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand">Deposit money into Customer's account</a>
+                <a class="navbar-brand">Deposit</a>
                 <div class="d-flex" style="gap: 10px;">
                     <a href="/customers">
                         <button class="btn btn-outline-light" type="button">
@@ -23,37 +23,25 @@
     </header>
 
     <div class="content">
-        <form th:object="${customer}" method="post" id="transferForm">
+        <form th:object="${withdraw}" method="post">
             <div class="row mb-3 mt-3">
                 <div class="col-lg-6">
-                    <label for="id" class="form-label">Customer ID</label>
-                    <input type="text" class="form-control" id="id" th:field="*{id}" readonly>
+                    <label for="fullName" class="form-label fw-bold">Full Name</label>
+                    <input type="text" class="form-control" id="fullName" th:field="*{customer.fullName}" disabled>
                 </div>
                 <div class="col-lg-6">
-                    <label for="fullName" class="form-label">Full Name</label>
-                    <input type="text" class="form-control" id="fullName" th:field="*{fullName}" readonly>
-                </div>
-                <div class="col-lg-6" style="display: none">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" th:field="*{email}">
-                </div>
-                <div class="col-lg-6" style="display: none">
-                    <label for="phone" class="form-label">Phone</label>
-                    <input type="tel" class="form-control" id="phone" th:field="*{phone}">
-                </div>
-                <div class="col-lg-6" style="display: none">
-                    <label for="address" class="form-label">Address</label>
-                    <input type="text" class="form-control" id="address" th:field="*{address}">
+                    <label for="email" class="form-label fw-bold">Email</label>
+                    <input type="email" class="form-control" id="email" th:field="*{customer.email}" disabled>
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-lg-6">
-                    <label for="balance" class="form-label">Current balance ($)</label>
-                    <input type="number" class="form-control" id="balance" th:field="*{balance}" readonly>
+                    <label for="balance" class="form-label fw-bold">Current balance ($)</label>
+                    <input type="text" class="form-control" id="balance" th:field="*{customer.balance}"  disabled>
                 </div>
                 <div class="col-lg-6">
-                    <label for="amount" class="form-label">Transaction Amount ($)</label>
-                    <input type="number" class="form-control" id="amount">
+                    <label for="address" class="form-label fw-bold">Transaction amount ($)</label>
+                    <input type="text" class="form-control" id="address" th:field="*{transactionAmount}" >
                 </div>
             </div>
 
@@ -61,7 +49,7 @@
                 <div class="col-lg-3">
                     <button type="submit" class="btn btn-outline-success">
                         <i class="fas fa-minus"></i>
-                        withdraw
+                        Withdraw
                     </button>
                 </div>
             </div>
@@ -88,16 +76,7 @@
         </div>
     </footer>
 </th:block>
-<script>
-    document.getElementById("transferForm").addEventListener("submit", function (event) {
-        var currentBalance = parseFloat(document.getElementById("balance").value);
-        var transactionAmount = parseFloat(document.getElementById("amount").value);
-        if (isNaN(transactionAmount) || transactionAmount > currentBalance) {
-            document.getElementById("balance").value = currentBalance;
-            return;
-        }
-        document.getElementById("balance").value = currentBalance - transactionAmount;
-    });
-</script>
+
+
 </body>
 </html>
