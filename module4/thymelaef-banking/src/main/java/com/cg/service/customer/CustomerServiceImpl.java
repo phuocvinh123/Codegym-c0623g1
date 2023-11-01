@@ -25,10 +25,22 @@ public class CustomerServiceImpl implements ICustomerService {
     private CustomerRepository customerRepository;
 
 
+
     @Override
     public List<Customer> findAll() {
         return customerRepository.findAll();
     }
+
+    @Override
+    public void incrementBalance(BigDecimal balance, Long id) {
+        customerRepository.incrementBalance(balance, id);
+    }
+
+    @Override
+    public void reduceBalance(BigDecimal balance, Long id) {
+        customerRepository.reduceBalance(balance, id);
+    }
+
     @Override
     public List<Customer> findAll(boolean deleted) {
         List<Customer> customer = findAll();
@@ -54,9 +66,6 @@ public class CustomerServiceImpl implements ICustomerService {
     public void deleteById(Long aLong) {
         customerRepository.deleteById(aLong);
     }
-
-
-
 
 
     @Override
@@ -102,9 +111,6 @@ public class CustomerServiceImpl implements ICustomerService {
 
         sender.setBalance(updatedSenderBalance);
         recipient.setBalance(updatedRecipientBalance);
-
-        save(sender);
-        save(recipient);
         transfer.setFees(10L);
         transfer.setFeesAmount(transferFee);
         transfer.setTransactionAmount(totalAmount);
