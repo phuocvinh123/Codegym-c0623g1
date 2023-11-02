@@ -77,7 +77,7 @@
                 <th:block th:if="${error} == true">
                     <div class="alert alert-danger">
                         <ul class="list-styled">
-                            <li th:each="err : ${#fields.errors('customer.*')}" th:text="${err}"></li>
+                            <li th:each="err : ${#fields.errors('withdraw.*')}" th:text="${err}"></li>
                         </ul>
                     </div>
                 </th:block>

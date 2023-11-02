@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -39,7 +40,7 @@ public class CustomerController {
 
     @GetMapping
     public String showListPage(Model model) {
-        List<Customer> customers = customerService.findAll();
+        List<Customer> customers = customerService.findAll(false);
         model.addAttribute("customers", customers);
 
         return "customer/list";
@@ -55,12 +56,6 @@ public class CustomerController {
     @GetMapping("/delete/{customerId}")
     public String showDeletePage(@PathVariable Long customerId, Model model) {
         Customer customerOptional = customerService.findById(customerId);
-        if(customerOptional==null){
-            model.addAttribute("success", false);
-            model.addAttribute("message", "id not found");
-            model.addAttribute("customer", new Customer());
-            return "customer/delete";
-        }
         model.addAttribute("customer", customerOptional);
         return "customer/delete";
     }
@@ -69,6 +64,10 @@ public class CustomerController {
     public String showDepositPage(@PathVariable Long customerId, Model model) {
         Customer customerOptional = customerService.findById(customerId);
         Deposit deposit = new Deposit();
+        if (customerOptional == null) {
+            deposit = null;
+        }
+
         deposit.setCustomer(customerOptional);
         model.addAttribute("deposit", deposit);
         return "customer/deposit";
@@ -76,17 +75,12 @@ public class CustomerController {
 
     @GetMapping("/withdraw/{customerId}")
     public String showWithdrawPage(@PathVariable Long customerId, Model model) {
-
         Customer customerOptional = customerService.findById(customerId);
-        if(customerOptional==null){
-            model.addAttribute("success", false);
-            model.addAttribute("message", "id not found");
-            model.addAttribute("withdraw", new Withdraw());
-            return "customer/withdraw";
-        }
         Withdraw withdraw = new Withdraw();
+        if (customerOptional == null) {
+            withdraw = null;
+        }
         withdraw.setCustomer(customerOptional);
-
         model.addAttribute("withdraw", withdraw);
 
         return "customer/withdraw";
@@ -96,15 +90,10 @@ public class CustomerController {
     public String showTransferPage(@PathVariable Long senderId, Model model) {
         Customer customerOptional = customerService.findById(senderId);
         List<Customer> recipients = customerService.findAllByIdNot(senderId);
-        if(customerOptional==null) {
-            model.addAttribute("success", false);
-            model.addAttribute("message", "id not found");
-            model.addAttribute("transfer", new Transfer());
-            model.addAttribute("recipients", recipients);
-            return "customer/transfer";
-        }
-
         Transfer transfer = new Transfer();
+        if (customerOptional == null) {
+            transfer = null;
+        }
         transfer.setSender(customerOptional);
         model.addAttribute("transfer", transfer);
         model.addAttribute("recipients", recipients);
@@ -115,15 +104,8 @@ public class CustomerController {
     @GetMapping("/update/{id}")
     public String ShowUpdate(@PathVariable long id, Model model) {
         Customer customerOptional = customerService.findById(id);
-        if(customerOptional==null){
-            model.addAttribute("success", false);
-            model.addAttribute("message", "id not found");
-            model.addAttribute("customer", new Customer());
-        }else{
-            model.addAttribute("success", true);
-            model.addAttribute("customer", customerOptional);
-        }
-
+        model.addAttribute("success", true);
+        model.addAttribute("customer", customerOptional);
         return "customer/update";
     }
 
@@ -182,26 +164,31 @@ public class CustomerController {
     }
 
     @PostMapping("/delete/{customerId}")
-    public String deleteCustomer(@PathVariable Long customerId ,@ModelAttribute Customer customer, RedirectAttributes redirectAttributes) {
-        customerService.deleteById(customerId);
-        redirectAttributes.addFlashAttribute("success", true);
-        redirectAttributes.addFlashAttribute("message", "Deleted successfully");
-
+    public String deleteCustomer(@PathVariable Long customerId, @ModelAttribute Customer customer, RedirectAttributes redirectAttributes) {
+        if(customer.getBalance().compareTo(BigDecimal.ZERO)>0){
+            redirectAttributes.addFlashAttribute("success", false);
+            redirectAttributes.addFlashAttribute("message", "The remaining balance cannot be deleted");
+        }else{
+            customer.setId(customerId);
+            customer.setDeleted(true);
+            customerService.save(customer);
+            redirectAttributes.addFlashAttribute("success", true);
+            redirectAttributes.addFlashAttribute("message", "Deleted successfully");
+        }
         return "redirect:/customers";
     }
 
     @PostMapping("/deposit/{customerId}")
-    public String deposit( @PathVariable Long customerId, @ModelAttribute Deposit deposit,BindingResult bindingResult, Model model) {
-        new Deposit().validate(deposit,bindingResult);
+    public String deposit(@PathVariable Long customerId, @ModelAttribute Deposit deposit, BindingResult bindingResult, Model model) {
         Customer customer = customerService.findById(customerId);
         deposit.setCustomer(customer);
+        new Deposit().validate(deposit, bindingResult);
         if (bindingResult.hasErrors()) {
             model.addAttribute("success", false);
             model.addAttribute("error", true);
             model.addAttribute("deposit", deposit);
             return "customer/deposit";
         }
-//        customerService.deposit(deposit);
         depositService.save(deposit);
         deposit.setTransactionAmount(null);
         model.addAttribute("deposit", new Deposit(customerService.findById(customerId)));
@@ -212,50 +199,42 @@ public class CustomerController {
     }
 
     @PostMapping("/withdraw/{customerId}")
-    public String Withdraw(@PathVariable Long customerId, @ModelAttribute Withdraw withdraw,BindingResult bindingResult, Model model) {
-        new Withdraw().validate(withdraw,bindingResult);
+    public String Withdraw(@PathVariable Long customerId, @ModelAttribute Withdraw withdraw, BindingResult bindingResult, Model model) {
         Customer customer = customerService.findById(customerId);
         withdraw.setCustomer(customer);
-
-
-
-        if (withdrawService.isValidWithdrawal(withdraw)) {
-//            customerService.withdraw(withdraw);
+        new Withdraw().validate(withdraw, bindingResult);
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("success", false);
+            model.addAttribute("message", "Invalid withdrawal");
+            model.addAttribute("error", true);
+        } else {
             withdrawService.save(withdraw);
             model.addAttribute("success", true);
             model.addAttribute("message", "Withdrawal successful");
-        } else {
-            if (bindingResult.hasErrors()) {
-                model.addAttribute("success", false);
-                model.addAttribute("message", "Invalid withdrawal");
-                model.addAttribute("error", true);
-                model.addAttribute("withdraw", withdraw);
-                return "customer/withdraw";
-            }
+            withdraw.setTransactionAmount(null);
+            model.addAttribute("withdraw", new Withdraw(customerService.findById(customerId)));
         }
-
-        withdraw.setTransactionAmount(null);
-        model.addAttribute("withdraw", new Withdraw(customerService.findById(customerId)));
-
         return "customer/withdraw";
     }
 
     @PostMapping("/transfer/{senderId}")
-    public String Transfer(@PathVariable Long senderId, @ModelAttribute Transfer transfer, @RequestParam Long recipientId, Model model) {
+    public String Transfer(@PathVariable Long senderId, @ModelAttribute Transfer transfer, @RequestParam Long recipientId, Model model, BindingResult bindingResult) {
         Customer sender = customerService.findById(senderId);
         Customer recipient = customerService.findById(recipientId);
         transfer.setSender(sender);
         transfer.setRecipient(recipient);
+        new Transfer().validate(transfer, bindingResult);
 
-        if (transferService.isValidTransfer(transfer)) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("success", false);
+            model.addAttribute("message", "Invalid transfer");
+            model.addAttribute("error", true);
+        } else {
             customerService.transfer(transfer);
             transferService.save(transfer);
             transfer.setTransferAmount(null);
             model.addAttribute("success", true);
             model.addAttribute("message", "Transfer successful");
-        } else {
-            model.addAttribute("success", false);
-            model.addAttribute("message", "Invalid transfer");
         }
 
         List<Customer> recipients = customerService.findAllByIdNot(senderId);
